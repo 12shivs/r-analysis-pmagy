@@ -49,9 +49,34 @@ paired_t_test <- function(before, after) {
 }
 
 # # Apply paired t-test to each pair of pre and post columns
-results <- map2(edu_hcomb[grepl("PRE", names(edu_hcomb))],
+results_EDU <- map2(edu_hcomb[grepl("PRE", names(edu_hcomb))],
                 edu_hcomb[grepl("POST", names(edu_hcomb))],
                 paired_t_test)
 
 # # Print the results
-print(results)
+print(results_EDU)
+
+# row wise means of pre data
+
+# make the copy of the data frame
+edu_PRE_index <- data.frame(rowMeans(edu_PRE))  
+
+# Apply rownames_to_column on the copy of 
+# DataFrame and put name of function sno
+edu_PRE_index <- tibble::rownames_to_column(edu_PRE_index, "s_no") 
+
+# print the copied DataFrame
+edu_PRE_index
+
+edu_POST_index <- read_excel(file_path,range = "Form Responses 1!AP1:AP487")
+
+edu_ind_hcomb <- cbind(edu_PRE_index, edu_POST_index)
+
+# # Apply paired t-test to each pair of pre and post columns
+results_edu_ind <- map2(edu_ind_hcomb[grepl("rowMeans.edu_PRE.", names(edu_ind_hcomb))],
+                        edu_ind_hcomb[grepl("EDU_INDEX", names(edu_ind_hcomb))],
+                paired_t_test)
+
+# # Print the results FOR Pre index and post index values
+print(results_edu_ind)
+
