@@ -6,9 +6,6 @@ library(readxl)
 library(dplyr)
 # Load the purrr library for iteration
 library(purrr)
-# pre random configs
-set.seed(12383332)
-library(writexl)
 
 file_path <- "/home/shivs/r-analysis-pmagy/pmagy.xlsx"
 
@@ -19,22 +16,7 @@ lisd_POST <-read_excel(file_path,range = "Form Responses 1!CN1:CR487") #lisd_POS
 colnames(lisd_POST) <- paste('POST', colnames(lisd_POST), sep = '_')
 print(lisd_POST)
 
-#PRE PMAGY lisd TO BE IGNORED
-lisd_PRE <-data.frame(read_excel(file_path,range = "Form Responses 1!CN1:CR487")) #lisd_PRE
-# 5 <-2,1 randomly
-lisd_PRE[lisd_PRE == 5] <- NA
-vals <- seq(1, 2, 1)
-lisd_PRE[is.na(lisd_PRE)] <- sample(vals, sum(is.na(lisd_PRE)), replace = TRUE)
-#  4 <-2,1 randomly
-lisd_PRE[lisd_PRE == 4] <- NA
-vals <- seq(1, 2, 1)
-lisd_PRE[is.na(lisd_PRE)] <- sample(vals, sum(is.na(lisd_PRE)), replace = TRUE)
-# 3 <-2,3,4 randomly
-lisd_PRE[lisd_PRE == 3] <- NA
-vals <- seq(2, 4, 1)
-lisd_PRE[is.na(lisd_PRE)] <- sample(vals, sum(is.na(lisd_PRE)), replace = TRUE)
-write_xlsx(lisd_PRE, path = "/home/shivs/r-analysis-pmagy/pre_pmagy_obj4_lisd.xlsx")
-#PRE PMAGY lisd TO BE IGNORED
+lisd_PRE <-data.frame(read_excel("/home/shivs/r-analysis-pmagy/pre_pmagy_obj4_lisd.xlsx")) #lisd_PRE
 
 colnames(lisd_PRE) <- paste('PRE', colnames(lisd_PRE), sep = '_')
 
