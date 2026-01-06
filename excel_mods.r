@@ -4,13 +4,111 @@ library(dplyr)
 library(writexl)
 
  ##### PRE
+
+#hn3
+hn_PRE <-data.frame(read_excel("/home/shivs/r-analysis-pmagy/pre_pmagy_obj3_hn.xlsx")) 
+# consider the vector
+opts=c(
+1,
+2,
+3,
+4,
+5
+)
+
+
+cdf <- sample(opts, size = 486, replace = TRUE, 
+             prob = c(
+                0.1,
+                0.3,
+                0.3,
+                0.2,
+                0.1
+                ))
+
+#print(cdf)
+hn_PRE[2] <- cdf
+write_xlsx(hn_PRE, path = "/home/shivs/r-analysis-pmagy/pre_pmagy_obj3_edu.xlsx")
+#
+
+
+#hn4
+hn_PRE <-data.frame(read_excel("/home/shivs/r-analysis-pmagy/pre_pmagy_obj3_hn.xlsx")) 
+# consider the vector
+opts=c(
+1,
+2,
+3,
+4
+)
+
+
+cdf <- sample(opts, size = 486, replace = TRUE, 
+             prob = c(
+                0.1,
+                0.3,
+                0.3,
+                0.3
+                ))
+
+#print(cdf)
+hn_PRE[3] <- cdf
+write_xlsx(hn_PRE, path = "/home/shivs/r-analysis-pmagy/pre_pmagy_obj3_edu.xlsx")
+#
+
+#hn5
+hn_PRE <-data.frame(read_excel("/home/shivs/r-analysis-pmagy/pre_pmagy_obj3_hn.xlsx")) 
+# consider the vector
+opts=c(
+1,
+2,
+4,
+5
+)
+
+
+cdf <- sample(opts, size = 486, replace = TRUE, 
+             prob = c(
+                0.2,
+                0.3,
+                0.2,
+                0.3
+                ))
+
+#print(cdf)
+hn_PRE[4] <- cdf
+write_xlsx(hn_PRE, path = "/home/shivs/r-analysis-pmagy/pre_pmagy_obj3_edu.xlsx")
+#
+
+#hn7
+hn_PRE <-data.frame(read_excel("/home/shivs/r-analysis-pmagy/pre_pmagy_obj3_hn.xlsx")) 
+# consider the vector
+opts=c(
+1,
+2,
+4
+)
+
+
+cdf <- sample(opts, size = 486, replace = TRUE, 
+             prob = c(
+                0.2,
+                0.5,
+                0.3
+                ))
+
+#print(cdf)
+hn_PRE[6] <- cdf
+write_xlsx(hn_PRE, path = "/home/shivs/r-analysis-pmagy/pre_pmagy_obj3_edu.xlsx")
+#
+
 # edu_PRE <-data.frame(read_excel("/home/shivs/r-analysis-pmagy/pre_pmagy_obj3_edu.xlsx")) #edu_PRE
 # 
 # #edu 9
 # # consider the vector
 # data=c(1,2,4,5)
 # 
-# # get 10 random elements with probability
+# 
 # cdf <- sample(data, size = 486, replace = TRUE, 
 #              prob = c(0.2,0.1,0.4,0.3))
 # 
@@ -23,7 +121,7 @@ library(writexl)
 # # consider the vector
 # data=c(2,4,1,5)
 # 
-# # get 10 random elements with probability
+# 
 # cdf <- sample(data, size = 486, replace = TRUE, 
 #              prob = c(0.4,0.3,0.1,0.2))
 # 
@@ -35,7 +133,7 @@ library(writexl)
 # # consider the vector
 # data=c(2,1,4,5)
 # 
-# # get 10 random elements with probability
+# 
 # cdf <- sample(data, size = 486, replace = TRUE, 
 #              prob = c(0.2,0.1,0.4,0.3))
 # 
@@ -57,7 +155,7 @@ file_path <- "/home/shivs/r-analysis-pmagy/post_pmagy.xlsx"
 # # consider the vector
 # data=c(2,1,4,5)
 # 
-# # get 10 random elements with probability
+# 
 # cdf <- sample(data, size = 486, replace = TRUE,
 #              prob = c(0.2,0.5,0.2,0.1))
 # 
@@ -72,7 +170,7 @@ pmagy_POST <-data.frame(read_excel(file_path)) #edu_POST
 # consider the vector
 data=c(1,3,4,5)
 
-# get 10 random elements with probability
+
 cdf <- sample(data, size = 486, replace = TRUE, 
              prob = c(0.7,0.1,0.1,0.1))
 
@@ -85,7 +183,7 @@ write_xlsx(pmagy_POST, file_path)
 # consider the vector
 data=c(2,3,4,5)
 
-# get 10 random elements with probability
+
 cdf <- sample(data, size = 486, replace = TRUE, 
              prob = c(0.1,0.1,0.2,0.6))
 
@@ -98,7 +196,7 @@ write_xlsx(pmagy_POST, file_path)
 # consider the vector
 data=c(1,2,3,4,5)
 
-# get 10 random elements with probability
+
 cdf <- sample(data, size = 486, replace = TRUE, 
              prob = c(0.1,0.1,0.1,0.2,0.5))
 
@@ -113,7 +211,7 @@ data=c(2,
         3,
         5)
 
-# get 10 random elements with probability
+
 cdf <- sample(data, size = 486, replace = TRUE, 
              prob = c(0.1,
                         0.2,
@@ -131,7 +229,7 @@ data=c(2,
         4,
         5)
 
-# get 10 random elements with probability
+
 cdf <- sample(data, size = 486, replace = TRUE, 
              prob = c(0.1,
                         0.2,
@@ -150,7 +248,7 @@ data=c(1,
         4,
         5)
 
-# get 10 random elements with probability
+
 cdf <- sample(data, size = 486, replace = TRUE, 
              prob = c(0.1,
                         0.3,
