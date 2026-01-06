@@ -13,7 +13,7 @@ print("EDU Section tests: ")
 #POST PMAGY edu
 edu_POST <-read_excel(file_path,range = "Form Responses 1!AE1:AO487") #edu_POST
 colnames(edu_POST) <- paste('POST', colnames(edu_POST), sep = '_')
-print(edu_POST)
+#print(edu_POST)
 
 edu_PRE <-data.frame(read_excel("/home/shivs/r-analysis-pmagy/pre_pmagy_obj3_edu.xlsx")) #edu_PRE
 
@@ -24,7 +24,7 @@ colnames(edu_PRE) <- paste('PRE', colnames(edu_PRE), sep = '_')
 
 # combine two data frames horizontally
 edu_hcomb <- cbind(edu_PRE, edu_POST)
-print(edu_hcomb)
+#print(edu_hcomb)
 # # Define a function to perform paired t-test between pairs of columns
 paired_t_test <- function(before, after) {
   t.test(before, after, paired = TRUE)
@@ -42,19 +42,19 @@ print(results_EDU)
 # row wise means of pre data
 
 # make the copy of the data frame
-edu_PRE_index <- data.frame(rowMeans(edu_PRE))  
+edu_PRE_index <- data.frame(rowMeans(edu_PRE))
 
-# Apply rownames_to_column on the copy of 
+# Apply rownames_to_column on the copy of
 # DataFrame and put name of function sno
-edu_PRE_index <- tibble::rownames_to_column(edu_PRE_index, "s_no") 
+edu_PRE_index <- tibble::rownames_to_column(edu_PRE_index, "s_no")
 
 edu_POST_index <- read_excel(file_path,range = "Form Responses 1!AP1:AP487")
 
 edu_ind_hcomb <- cbind(edu_PRE_index, edu_POST_index)
 
 #Print pre index and post index values, serial no also present for convenience
-print("Print pre index and post index values, serial no also present for convenience")
-edu_ind_hcomb
+#print("Print pre index and post index values, serial no also present for convenience")
+#edu_ind_hcomb
 
 # # Apply paired t-test to each pair of pre and post columns
 results_edu_ind <- map2(edu_ind_hcomb[grepl("rowMeans.edu_PRE.", names(edu_ind_hcomb))],
@@ -76,7 +76,7 @@ print("HN Section tests: ")
 #POST PMAGY hn
 hn_POST <-read_excel(file_path,range = "Form Responses 1!AQ1:BB487") #hn_POST
 colnames(hn_POST) <- paste('POST', colnames(hn_POST), sep = '_')
-print(hn_POST)
+#print(hn_POST)
 
 #PRE PMAGY hn TO BE IGNORED
 hn_PRE <-data.frame(read_excel("/home/shivs/r-analysis-pmagy/pre_pmagy_obj3_hn.xlsx")) #hn_PRE
@@ -88,7 +88,7 @@ colnames(hn_PRE) <- paste('PRE', colnames(hn_PRE), sep = '_')
 
 # combine two data frames horizontally
 hn_hcomb <- cbind(hn_PRE, hn_POST)
-print(hn_hcomb)
+#print(hn_hcomb)
 # # Define a function to perform paired t-test between pairs of columns
 paired_t_test <- function(before, after) {
   t.test(before, after, paired = TRUE)
@@ -106,19 +106,20 @@ print(results_hn)
 # row wise means of pre data
 
 # make the copy of the data frame
-hn_PRE_index <- data.frame(rowMeans(hn_PRE))  
+hn_PRE_index <- data.frame(rowMeans(hn_PRE))
 
-# Apply rownames_to_column on the copy of 
+# Apply rownames_to_column on the copy of
 # DataFrame and put name of function sno
-hn_PRE_index <- tibble::rownames_to_column(hn_PRE_index, "s_no") 
+hn_PRE_index <- tibble::rownames_to_column(hn_PRE_index, "s_no")
 
 hn_POST_index <- read_excel(file_path,range = "Form Responses 1!BC1:BC487")
 
 hn_ind_hcomb <- cbind(hn_PRE_index, hn_POST_index)
 
 #Print pre index and post index values, serial no also present for convenience
-print("Print pre index and post index values, serial no also present for convenience")
-hn_ind_hcomb
+
+#print("Print pre index and post index values, serial no also present for convenience")
+#hn_ind_hcomb
 
 # # Apply paired t-test to each pair of pre and post columns
 results_hn_ind <- map2(hn_ind_hcomb[grepl("rowMeans.hn_PRE.", names(hn_ind_hcomb))],
@@ -131,4 +132,3 @@ print(results_hn_ind)
 
 ### HN Section tests COMPLETE
 print("HN Section tests COMPLETE")
-
