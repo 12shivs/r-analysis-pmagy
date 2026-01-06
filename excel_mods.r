@@ -27,8 +27,8 @@ cdf <- sample(opts, size = 486, replace = TRUE,
                 ))
 
 #print(cdf)
-hn_PRE[2] <- cdf
-write_xlsx(hn_PRE, path = "/home/shivs/r-analysis-pmagy/pre_pmagy_obj3_edu.xlsx")
+hn_PRE[3] <- cdf
+write_xlsx(hn_PRE, path = "/home/shivs/r-analysis-pmagy/pre_pmagy_obj3_hn.xlsx")
 #
 
 
@@ -52,8 +52,8 @@ cdf <- sample(opts, size = 486, replace = TRUE,
                 ))
 
 #print(cdf)
-hn_PRE[3] <- cdf
-write_xlsx(hn_PRE, path = "/home/shivs/r-analysis-pmagy/pre_pmagy_obj3_edu.xlsx")
+hn_PRE[4] <- cdf
+write_xlsx(hn_PRE, path = "/home/shivs/r-analysis-pmagy/pre_pmagy_obj3_hn.xlsx")
 #
 
 #hn5
@@ -76,8 +76,8 @@ cdf <- sample(opts, size = 486, replace = TRUE,
                 ))
 
 #print(cdf)
-hn_PRE[4] <- cdf
-write_xlsx(hn_PRE, path = "/home/shivs/r-analysis-pmagy/pre_pmagy_obj3_edu.xlsx")
+hn_PRE[5] <- cdf
+write_xlsx(hn_PRE, path = "/home/shivs/r-analysis-pmagy/pre_pmagy_obj3_hn.xlsx")
 #
 
 #hn7
@@ -98,8 +98,8 @@ cdf <- sample(opts, size = 486, replace = TRUE,
                 ))
 
 #print(cdf)
-hn_PRE[6] <- cdf
-write_xlsx(hn_PRE, path = "/home/shivs/r-analysis-pmagy/pre_pmagy_obj3_edu.xlsx")
+hn_PRE[7] <- cdf
+write_xlsx(hn_PRE, path = "/home/shivs/r-analysis-pmagy/pre_pmagy_obj3_hn.xlsx")
 #
 
 # edu_PRE <-data.frame(read_excel("/home/shivs/r-analysis-pmagy/pre_pmagy_obj3_edu.xlsx")) #edu_PRE
@@ -176,7 +176,7 @@ cdf <- sample(data, size = 486, replace = TRUE,
 
 #print(cdf)
 pmagy_POST[39] <- cdf
-write_xlsx(pmagy_POST, file_path)
+#write_xlsx(pmagy_POST, file_path)
 ###
 
 #edu 10
@@ -189,7 +189,7 @@ cdf <- sample(data, size = 486, replace = TRUE,
 
 #print(cdf)
 pmagy_POST[40] <- cdf
-write_xlsx(pmagy_POST, file_path)
+#write_xlsx(pmagy_POST, file_path)
 ###
 
 #hn 3
@@ -202,7 +202,7 @@ cdf <- sample(data, size = 486, replace = TRUE,
 
 #print(cdf)
 pmagy_POST[44] <- cdf
-write_xlsx(pmagy_POST, file_path)
+#write_xlsx(pmagy_POST, file_path)
 ###
 
 #hn 4
@@ -219,7 +219,7 @@ cdf <- sample(data, size = 486, replace = TRUE,
 
 #print(cdf)
 pmagy_POST[45] <- cdf
-write_xlsx(pmagy_POST, file_path)
+#write_xlsx(pmagy_POST, file_path)
 ###
 
 #hn 5
@@ -238,7 +238,7 @@ cdf <- sample(data, size = 486, replace = TRUE,
 
 #print(cdf)
 pmagy_POST[46] <- cdf
-write_xlsx(pmagy_POST, file_path)
+#write_xlsx(pmagy_POST, file_path)
 ###
 
 #hn 8
@@ -257,6 +257,6 @@ cdf <- sample(data, size = 486, replace = TRUE,
 
 #print(cdf)
 pmagy_POST[49] <- cdf
-write_xlsx(pmagy_POST, file_path)
+#write_xlsx(pmagy_POST, file_path)
 ###
 
