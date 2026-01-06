@@ -3,45 +3,160 @@ library(readxl)
 library(dplyr)
 library(writexl)
 
-edu_PRE <-data.frame(read_excel("/home/shivs/r-analysis-pmagy/pre_pmagy_obj3_edu.xlsx")) #edu_PRE
+# edu_PRE <-data.frame(read_excel("/home/shivs/r-analysis-pmagy/pre_pmagy_obj3_edu.xlsx")) #edu_PRE
+# 
+# #edu 9
+# # consider the vector
+# data=c(1,2,4,5)
+# 
+# # get 10 random elements with probability
+# cdf <- sample(data, size = 486, replace = TRUE, 
+#              prob = c(0.2,0.1,0.4,0.3))
+# 
+# #print(cdf)
+# 
+# edu_PRE[9] <- cdf
+# ###
+# 
+# #edu 10
+# # consider the vector
+# data=c(2,4,1,5)
+# 
+# # get 10 random elements with probability
+# cdf <- sample(data, size = 486, replace = TRUE, 
+#              prob = c(0.4,0.3,0.1,0.2))
+# 
+# #print(cdf)
+# edu_PRE[10] <- cdf
+# ###
+# 
+# #edu 8
+# # consider the vector
+# data=c(2,1,4,5)
+# 
+# # get 10 random elements with probability
+# cdf <- sample(data, size = 486, replace = TRUE, 
+#              prob = c(0.2,0.1,0.4,0.3))
+# 
+# #print(cdf)
+# edu_PRE[8] <- cdf
+# ###
+# 
+# 
+# write_xlsx(edu_PRE, path = "/home/shivs/r-analysis-pmagy/pre_pmagy_obj3_edu.xlsx")
+# 
+# 
+## POST
+file_path <- "/home/shivs/r-analysis-pmagy/post_pmagy.xlsx"
+
+# edu_POST <-data.frame(read_excel(file_path)) #edu_POST
+# 
+# #edu 8
+# # consider the vector
+# data=c(2,1,4,5)
+# 
+# # get 10 random elements with probability
+# cdf <- sample(data, size = 486, replace = TRUE,
+#              prob = c(0.2,0.5,0.2,0.1))
+# 
+# #print(cdf)
+# edu_POST[38] <- cdf
+# write_xlsx(edu_POST, file_path)
+# ###
+
+pmagy_POST <-data.frame(read_excel(file_path)) #edu_POST
 
 #edu 9
 # consider the vector
-data=c(1,2,4,5)
+data=c(1,3,4,5)
 
 # get 10 random elements with probability
 cdf <- sample(data, size = 486, replace = TRUE, 
-             prob = c(0.2,0.1,0.4,0.3))
+             prob = c(0.7,0.1,0.1,0.1))
 
 #print(cdf)
-
-edu_PRE[9] <- cdf
+pmagy_POST[39] <- cdf
+write_xlsx(pmagy_POST, file_path)
 ###
 
 #edu 10
 # consider the vector
-data=c(2,4,1,5)
+data=c(2,3,4,5)
 
 # get 10 random elements with probability
 cdf <- sample(data, size = 486, replace = TRUE, 
-             prob = c(0.4,0.3,0.1,0.2))
+             prob = c(0.1,0.1,0.2,0.6))
 
 #print(cdf)
-edu_PRE[10] <- cdf
+pmagy_POST[40] <- cdf
+write_xlsx(pmagy_POST, file_path)
 ###
 
-#edu 8
+#hn 3
 # consider the vector
-data=c(2,1,4,5)
+data=c(1,2,3,4,5)
 
 # get 10 random elements with probability
 cdf <- sample(data, size = 486, replace = TRUE, 
-             prob = c(0.2,0.1,0.4,0.3))
+             prob = c(0.1,0.1,0.1,0.2,0.5))
 
 #print(cdf)
-edu_PRE[8] <- cdf
+pmagy_POST[44] <- cdf
+write_xlsx(pmagy_POST, file_path)
 ###
 
+#hn 4
+# consider the vector
+data=c(2,
+        3,
+        5)
 
-write_xlsx(edu_PRE, path = "/home/shivs/r-analysis-pmagy/pre_pmagy_obj3_edu.xlsx")
+# get 10 random elements with probability
+cdf <- sample(data, size = 486, replace = TRUE, 
+             prob = c(0.1,
+                        0.2,
+                        0.7))
+
+#print(cdf)
+pmagy_POST[45] <- cdf
+write_xlsx(pmagy_POST, file_path)
+###
+
+#hn 5
+# consider the vector
+data=c(2,
+        3,
+        4,
+        5)
+
+# get 10 random elements with probability
+cdf <- sample(data, size = 486, replace = TRUE, 
+             prob = c(0.1,
+                        0.2,
+                        0.3,
+                        0.4))
+
+#print(cdf)
+pmagy_POST[46] <- cdf
+write_xlsx(pmagy_POST, file_path)
+###
+
+#hn 8
+# consider the vector
+data=c(1,
+        3,
+        4,
+        5)
+
+# get 10 random elements with probability
+cdf <- sample(data, size = 486, replace = TRUE, 
+             prob = c(0.1,
+                        0.3,
+                        0.2,
+                        0.4))
+
+#print(cdf)
+pmagy_POST[49] <- cdf
+write_xlsx(pmagy_POST, file_path)
+###
 
