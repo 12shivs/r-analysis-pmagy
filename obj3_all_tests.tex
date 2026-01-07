@@ -1,0 +1,1186 @@
+% Options for packages loaded elsewhere
+\PassOptionsToPackage{unicode}{hyperref}
+\PassOptionsToPackage{hyphens}{url}
+\documentclass[
+]{article}
+\usepackage{xcolor}
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath,amssymb}
+\setcounter{secnumdepth}{-\maxdimen} % remove section numbering
+\usepackage{iftex}
+\ifPDFTeX
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+  \usepackage{textcomp} % provide euro and other symbols
+\else % if luatex or xetex
+  \usepackage{unicode-math} % this also loads fontspec
+  \defaultfontfeatures{Scale=MatchLowercase}
+  \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
+\fi
+\usepackage{lmodern}
+\ifPDFTeX\else
+  % xetex/luatex font selection
+\fi
+% Use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\IfFileExists{microtype.sty}{% use microtype if available
+  \usepackage[]{microtype}
+  \UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\makeatletter
+\@ifundefined{KOMAClassName}{% if non-KOMA class
+  \IfFileExists{parskip.sty}{%
+    \usepackage{parskip}
+  }{% else
+    \setlength{\parindent}{0pt}
+    \setlength{\parskip}{6pt plus 2pt minus 1pt}}
+}{% if KOMA class
+  \KOMAoptions{parskip=half}}
+\makeatother
+\usepackage{color}
+\usepackage{fancyvrb}
+\newcommand{\VerbBar}{|}
+\newcommand{\VERB}{\Verb[commandchars=\\\{\}]}
+\DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+% Add ',fontsize=\small' for more characters per line
+\usepackage{framed}
+\definecolor{shadecolor}{RGB}{248,248,248}
+\newenvironment{Shaded}{\begin{snugshade}}{\end{snugshade}}
+\newcommand{\AlertTok}[1]{\textcolor[rgb]{0.94,0.16,0.16}{#1}}
+\newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{#1}}
+\newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\BuiltInTok}[1]{#1}
+\newcommand{\CharTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\CommentTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{#1}}
+\newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{#1}}
+\newcommand{\DecValTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\ErrorTok}[1]{\textcolor[rgb]{0.64,0.00,0.00}{\textbf{#1}}}
+\newcommand{\ExtensionTok}[1]{#1}
+\newcommand{\FloatTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\ImportTok}[1]{#1}
+\newcommand{\InformationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\NormalTok}[1]{#1}
+\newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.81,0.36,0.00}{\textbf{#1}}}
+\newcommand{\OtherTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{#1}}
+\newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\RegionMarkerTok}[1]{#1}
+\newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.81,0.36,0.00}{\textbf{#1}}}
+\newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\StringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\VariableTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\WarningTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\usepackage{graphicx}
+\makeatletter
+\newsavebox\pandoc@box
+\newcommand*\pandocbounded[1]{% scales image to fit in text height/width
+  \sbox\pandoc@box{#1}%
+  \Gscale@div\@tempa{\textheight}{\dimexpr\ht\pandoc@box+\dp\pandoc@box\relax}%
+  \Gscale@div\@tempb{\linewidth}{\wd\pandoc@box}%
+  \ifdim\@tempb\p@<\@tempa\p@\let\@tempa\@tempb\fi% select the smaller of both
+  \ifdim\@tempa\p@<\p@\scalebox{\@tempa}{\usebox\pandoc@box}%
+  \else\usebox{\pandoc@box}%
+  \fi%
+}
+% Set default figure placement to htbp
+\def\fps@figure{htbp}
+\makeatother
+\setlength{\emergencystretch}{3em} % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\usepackage{bookmark}
+\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
+\urlstyle{same}
+\hypersetup{
+  pdftitle={obj3\_all\_tests.r},
+  pdfauthor={shivs},
+  hidelinks,
+  pdfcreator={LaTeX via pandoc}}
+
+\title{obj3\_all\_tests.r}
+\author{shivs}
+\date{2026-01-07}
+
+\begin{document}
+\maketitle
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# obj 3. To analyze the impact of PMAGY on education and health facilities in the selected villages.}
+
+\CommentTok{\# import packages}
+\FunctionTok{library}\NormalTok{(readxl)}
+\FunctionTok{library}\NormalTok{(ltm)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Loading required package: MASS
+\end{verbatim}
+
+\begin{verbatim}
+## Loading required package: msm
+\end{verbatim}
+
+\begin{verbatim}
+## Loading required package: polycor
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{library}\NormalTok{(dplyr)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+## Attaching package: 'dplyr'
+\end{verbatim}
+
+\begin{verbatim}
+## The following object is masked from 'package:MASS':
+## 
+##     select
+\end{verbatim}
+
+\begin{verbatim}
+## The following objects are masked from 'package:stats':
+## 
+##     filter, lag
+\end{verbatim}
+
+\begin{verbatim}
+## The following objects are masked from 'package:base':
+## 
+##     intersect, setdiff, setequal, union
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Load the purrr library for iteration}
+\FunctionTok{library}\NormalTok{(purrr)}
+
+\NormalTok{post\_pmagy\_file\_path }\OtherTok{\textless{}{-}} \StringTok{"/home/shivs/r{-}analysis{-}pmagy/post\_pmagy.xlsx"}
+
+\DocumentationTok{\#\#\# EDU Section tests:}
+
+\FunctionTok{print}\NormalTok{(}\StringTok{"EDU Section tests: "}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] "EDU Section tests: "
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\#POST PMAGY edu}
+\NormalTok{edu\_POST }\OtherTok{\textless{}{-}}\FunctionTok{data.frame}\NormalTok{(}\FunctionTok{read\_excel}\NormalTok{(post\_pmagy\_file\_path,}\AttributeTok{sheet =} \StringTok{"Sheet1"}\NormalTok{,}\AttributeTok{range =} \StringTok{"AE1:AN487"}\NormalTok{)) }\CommentTok{\#edu\_POST}
+\FunctionTok{colnames}\NormalTok{(edu\_POST) }\OtherTok{\textless{}{-}} \FunctionTok{paste}\NormalTok{(}\StringTok{\textquotesingle{}POST\textquotesingle{}}\NormalTok{, }\FunctionTok{colnames}\NormalTok{(edu\_POST), }\AttributeTok{sep =} \StringTok{\textquotesingle{}\_\textquotesingle{}}\NormalTok{)}
+\CommentTok{\#PRE PMAGY edu}
+\NormalTok{edu\_PRE }\OtherTok{\textless{}{-}}\FunctionTok{data.frame}\NormalTok{(}\FunctionTok{read\_excel}\NormalTok{(}\StringTok{"/home/shivs/r{-}analysis{-}pmagy/pre\_pmagy\_obj3\_edu.xlsx"}\NormalTok{,}\AttributeTok{range =} \StringTok{"A1:J487"}\NormalTok{)) }\CommentTok{\#edu\_PRE}
+\FunctionTok{colnames}\NormalTok{(edu\_PRE) }\OtherTok{\textless{}{-}} \FunctionTok{paste}\NormalTok{(}\StringTok{\textquotesingle{}PRE\textquotesingle{}}\NormalTok{, }\FunctionTok{colnames}\NormalTok{(edu\_PRE), }\AttributeTok{sep =} \StringTok{\textquotesingle{}\_\textquotesingle{}}\NormalTok{)}
+
+
+\CommentTok{\#calculate Cronbach\textquotesingle{}s Alpha:}
+\FunctionTok{print}\NormalTok{(}\FunctionTok{cronbach.alpha}\NormalTok{(edu\_POST))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+## Cronbach's alpha for the 'edu_POST' data-set
+## 
+## Items: 10
+## Sample units: 486
+## alpha: 0.093
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{print}\NormalTok{(}\FunctionTok{cronbach.alpha}\NormalTok{(edu\_PRE))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+## Cronbach's alpha for the 'edu_PRE' data-set
+## 
+## Items: 10
+## Sample units: 486
+## alpha: -0.07
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\#}
+
+\CommentTok{\#Variance Inflation Factor (VIF):}
+\FunctionTok{library}\NormalTok{(car)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Loading required package: carData
+\end{verbatim}
+
+\begin{verbatim}
+## 
+## Attaching package: 'car'
+\end{verbatim}
+
+\begin{verbatim}
+## The following object is masked from 'package:purrr':
+## 
+##     some
+\end{verbatim}
+
+\begin{verbatim}
+## The following object is masked from 'package:dplyr':
+## 
+##     recode
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{library}\NormalTok{(caTools)}
+\CommentTok{\# Fit a regression model on post data}
+\NormalTok{edu\_POST\_w\_index }\OtherTok{\textless{}{-}}\FunctionTok{data.frame}\NormalTok{(}\FunctionTok{read\_excel}\NormalTok{(post\_pmagy\_file\_path,}\AttributeTok{sheet =} \StringTok{"Sheet1"}\NormalTok{,}\AttributeTok{range =} \StringTok{"AE1:AO487"}\NormalTok{))}
+\FunctionTok{colnames}\NormalTok{(edu\_POST\_w\_index) }\OtherTok{\textless{}{-}} \FunctionTok{paste}\NormalTok{(}\StringTok{\textquotesingle{}POST\textquotesingle{}}\NormalTok{, }\FunctionTok{colnames}\NormalTok{(edu\_POST\_w\_index), }\AttributeTok{sep =} \StringTok{\textquotesingle{}\_\textquotesingle{}}\NormalTok{)}
+\NormalTok{model\_all }\OtherTok{\textless{}{-}} \FunctionTok{lm}\NormalTok{(POST\_EDU\_INDEX }\SpecialCharTok{\textasciitilde{}}\NormalTok{ ., }\AttributeTok{data =}\NormalTok{ edu\_POST\_w\_index)}
+\CommentTok{\# Calculate VIF}
+\NormalTok{vif\_results }\OtherTok{\textless{}{-}}\NormalTok{ car}\SpecialCharTok{::}\FunctionTok{vif}\NormalTok{(model\_all)}
+
+\FunctionTok{print}\NormalTok{(}\StringTok{"VIF results for post data:"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] "VIF results for post data:"
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{print}\NormalTok{(vif\_results)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## POST_EDU.1....All.children.aged..6.17..years.in.your.household.are.attending.school...Primary..Middle..Secondary.and.Higher.Secondary.School. 
+##                                                                                                                                      1.020819 
+##                                  POST_EDU.2...All.children..18.23..in.your.household.are.currently.attending.post.higher.secondary.education. 
+##                                                                                                                                      1.038576 
+##                                                             POST_EDU.3...Children.in.our.household.receive.mid.day.meals.at.school.regularly. 
+##                                                                                                                                      1.091568 
+##                               POST_EDU.4...Children.in.my.household.have.benefited.from.government.scholarships..Pre.metric.and.Post.Metric.. 
+##                                                                                                                                      1.153481 
+##                                       POST_EDU.5...Availability.of.teachers.improved.in.the.village.schools.since.the.implementation.of.PMAGY 
+##                                                                                                                                      1.134813 
+##                                                                  POST_EDU.6...Children.in.my.household.have.access.to.digital.learning.tools. 
+##                                                                                                                                      1.127888 
+##                                                       POST_EDU.7...Children.in.my.household.actively.participate.in.online.education.programs 
+##                                                                                                                                      1.092862 
+##      POST_EDU.8...Has.anyone.in.your.family.ever.stopped.going.to.college.because.of.difficulty.in.traveling.or.lack.of.transport.facilities. 
+##                                                                                                                                      1.019261 
+##          POST_EDU.9...Has.any.child.from.your.family.left.school.before.completing.it.due.to.financial.reasons.or.household.responsibilities. 
+##                                                                                                                                      1.015845 
+##                                                            POST_EDU.10....Students.in.our.household.attend.school.more.regularly.since.PMAGY. 
+##                                                                                                                                      1.023575
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Fit a regression model on pre data}
+\NormalTok{edu\_PRE\_w\_index }\OtherTok{\textless{}{-}}\FunctionTok{data.frame}\NormalTok{(}\FunctionTok{read\_excel}\NormalTok{(}\StringTok{"/home/shivs/r{-}analysis{-}pmagy/pre\_pmagy\_obj3\_edu.xlsx"}\NormalTok{,}\AttributeTok{range =} \StringTok{"A1:K487"}\NormalTok{))}
+\FunctionTok{colnames}\NormalTok{(edu\_PRE\_w\_index) }\OtherTok{\textless{}{-}} \FunctionTok{paste}\NormalTok{(}\StringTok{\textquotesingle{}PRE\textquotesingle{}}\NormalTok{, }\FunctionTok{colnames}\NormalTok{(edu\_PRE\_w\_index), }\AttributeTok{sep =} \StringTok{\textquotesingle{}\_\textquotesingle{}}\NormalTok{)}
+
+\NormalTok{model\_all }\OtherTok{\textless{}{-}} \FunctionTok{lm}\NormalTok{(PRE\_EDU\_INDEX }\SpecialCharTok{\textasciitilde{}}\NormalTok{ ., }\AttributeTok{data =}\NormalTok{ edu\_PRE\_w\_index)}
+\CommentTok{\# Calculate VIF}
+\NormalTok{vif\_results }\OtherTok{\textless{}{-}}\NormalTok{ car}\SpecialCharTok{::}\FunctionTok{vif}\NormalTok{(model\_all)}
+\FunctionTok{print}\NormalTok{(}\StringTok{"VIF results for pre data:"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] "VIF results for pre data:"
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{print}\NormalTok{(vif\_results)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## PRE_EDU.1....All.children.aged..6.17..years.in.your.household.are.attending.school...Primary..Middle..Secondary.and.Higher.Secondary.School. 
+##                                                                                                                                     1.010827 
+##                                  PRE_EDU.2...All.children..18.23..in.your.household.are.currently.attending.post.higher.secondary.education. 
+##                                                                                                                                     1.030469 
+##                                                             PRE_EDU.3...Children.in.our.household.receive.mid.day.meals.at.school.regularly. 
+##                                                                                                                                     1.011279 
+##                               PRE_EDU.4...Children.in.my.household.have.benefited.from.government.scholarships..Pre.metric.and.Post.Metric.. 
+##                                                                                                                                     1.027301 
+##                                       PRE_EDU.5...Availability.of.teachers.improved.in.the.village.schools.since.the.implementation.of.PMAGY 
+##                                                                                                                                     1.017791 
+##                                                                  PRE_EDU.6...Children.in.my.household.have.access.to.digital.learning.tools. 
+##                                                                                                                                     1.010098 
+##                                                       PRE_EDU.7...Children.in.my.household.actively.participate.in.online.education.programs 
+##                                                                                                                                     1.023414 
+##      PRE_EDU.8...Has.anyone.in.your.family.ever.stopped.going.to.college.because.of.difficulty.in.traveling.or.lack.of.transport.facilities. 
+##                                                                                                                                     1.014436 
+##          PRE_EDU.9...Has.any.child.from.your.family.left.school.before.completing.it.due.to.financial.reasons.or.household.responsibilities. 
+##                                                                                                                                     1.008338 
+##                                                            PRE_EDU.10....Students.in.our.household.attend.school.more.regularly.since.PMAGY. 
+##                                                                                                                                     1.011488
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\#TODO: Visualizing VIF Values from here https://www.geeksforgeeks.org/r{-}language/vif{-}function{-}in{-}r/}
+\CommentTok{\#}
+
+\CommentTok{\# Using theShapiro–Wilk Test :}
+\FunctionTok{print}\NormalTok{(}\StringTok{"Shapiro–Wilk Test results for pre data:"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] "Shapiro–Wilk Test results for pre data:"
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{print}\NormalTok{(}\FunctionTok{shapiro.test}\NormalTok{(edu\_PRE\_w\_index}\SpecialCharTok{$}\NormalTok{PRE\_EDU\_INDEX))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+##  Shapiro-Wilk normality test
+## 
+## data:  edu_PRE_w_index$PRE_EDU_INDEX
+## W = 0.98897, p-value = 0.001015
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{print}\NormalTok{(}\StringTok{"Shapiro–Wilk Test results for post data:"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] "Shapiro–Wilk Test results for post data:"
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{print}\NormalTok{(}\FunctionTok{shapiro.test}\NormalTok{(edu\_POST\_w\_index}\SpecialCharTok{$}\NormalTok{POST\_EDU\_INDEX))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+##  Shapiro-Wilk normality test
+## 
+## data:  edu_POST_w_index$POST_EDU_INDEX
+## W = 0.98917, p-value = 0.001174
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\#}
+
+\CommentTok{\# Paired Samples Wilcoxon Test : }
+
+\CommentTok{\# combine two data frames horizontally}
+\NormalTok{edu\_pre\_post\_w\_index\_hcomb }\OtherTok{\textless{}{-}} \FunctionTok{cbind}\NormalTok{(edu\_PRE\_w\_index, edu\_POST\_w\_index)}
+
+\CommentTok{\# \# Define a function to perform paired Paired Samples Wilcoxon Test between pairs of columns}
+\NormalTok{paired\_wilcoxon\_test }\OtherTok{\textless{}{-}} \ControlFlowTok{function}\NormalTok{(before, after) \{}
+  \FunctionTok{wilcox.test}\NormalTok{(before, after, }\AttributeTok{paired =} \ConstantTok{TRUE}\NormalTok{)}
+\NormalTok{\}}
+
+\CommentTok{\# Apply paired Paired Samples Wilcoxon Test to each pair of pre and post columns}
+\NormalTok{results\_wilcoxon\_test }\OtherTok{\textless{}{-}} \FunctionTok{map2}\NormalTok{(edu\_pre\_post\_w\_index\_hcomb[}\FunctionTok{grepl}\NormalTok{(}\StringTok{"PRE"}\NormalTok{, }\FunctionTok{names}\NormalTok{(edu\_pre\_post\_w\_index\_hcomb))],}
+\NormalTok{                edu\_pre\_post\_w\_index\_hcomb[}\FunctionTok{grepl}\NormalTok{(}\StringTok{"POST"}\NormalTok{, }\FunctionTok{names}\NormalTok{(edu\_pre\_post\_w\_index\_hcomb))],}
+\NormalTok{                paired\_wilcoxon\_test)}
+
+\CommentTok{\# \# Print the results}
+\FunctionTok{print}\NormalTok{(}\StringTok{"Print the results for column/question wise Paired Samples Wilcoxon Test"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] "Print the results for column/question wise Paired Samples Wilcoxon Test"
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{print}\NormalTok{(results\_wilcoxon\_test)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## $PRE_EDU.1....All.children.aged..6.17..years.in.your.household.are.attending.school...Primary..Middle..Secondary.and.Higher.Secondary.School.
+## 
+##  Wilcoxon signed rank test with continuity correction
+## 
+## data:  before and after
+## V = 3363, p-value < 2.2e-16
+## alternative hypothesis: true location shift is not equal to 0
+## 
+## 
+## $PRE_EDU.2...All.children..18.23..in.your.household.are.currently.attending.post.higher.secondary.education.
+## 
+##  Wilcoxon signed rank test with continuity correction
+## 
+## data:  before and after
+## V = 5137.5, p-value < 2.2e-16
+## alternative hypothesis: true location shift is not equal to 0
+## 
+## 
+## $PRE_EDU.3...Children.in.our.household.receive.mid.day.meals.at.school.regularly.
+## 
+##  Wilcoxon signed rank test with continuity correction
+## 
+## data:  before and after
+## V = 22, p-value < 2.2e-16
+## alternative hypothesis: true location shift is not equal to 0
+## 
+## 
+## $PRE_EDU.4...Children.in.my.household.have.benefited.from.government.scholarships..Pre.metric.and.Post.Metric..
+## 
+##  Wilcoxon signed rank test with continuity correction
+## 
+## data:  before and after
+## V = 6, p-value < 2.2e-16
+## alternative hypothesis: true location shift is not equal to 0
+## 
+## 
+## $PRE_EDU.5...Availability.of.teachers.improved.in.the.village.schools.since.the.implementation.of.PMAGY
+## 
+##  Wilcoxon signed rank test with continuity correction
+## 
+## data:  before and after
+## V = 10.5, p-value < 2.2e-16
+## alternative hypothesis: true location shift is not equal to 0
+## 
+## 
+## $PRE_EDU.6...Children.in.my.household.have.access.to.digital.learning.tools.
+## 
+##  Wilcoxon signed rank test with continuity correction
+## 
+## data:  before and after
+## V = 115, p-value < 2.2e-16
+## alternative hypothesis: true location shift is not equal to 0
+## 
+## 
+## $PRE_EDU.7...Children.in.my.household.actively.participate.in.online.education.programs
+## 
+##  Wilcoxon signed rank test with continuity correction
+## 
+## data:  before and after
+## V = 100, p-value < 2.2e-16
+## alternative hypothesis: true location shift is not equal to 0
+## 
+## 
+## $PRE_EDU.8...Has.anyone.in.your.family.ever.stopped.going.to.college.because.of.difficulty.in.traveling.or.lack.of.transport.facilities.
+## 
+##  Wilcoxon signed rank test with continuity correction
+## 
+## data:  before and after
+## V = 68380, p-value < 2.2e-16
+## alternative hypothesis: true location shift is not equal to 0
+## 
+## 
+## $PRE_EDU.9...Has.any.child.from.your.family.left.school.before.completing.it.due.to.financial.reasons.or.household.responsibilities.
+## 
+##  Wilcoxon signed rank test with continuity correction
+## 
+## data:  before and after
+## V = 60662, p-value < 2.2e-16
+## alternative hypothesis: true location shift is not equal to 0
+## 
+## 
+## $PRE_EDU.10....Students.in.our.household.attend.school.more.regularly.since.PMAGY.
+## 
+##  Wilcoxon signed rank test with continuity correction
+## 
+## data:  before and after
+## V = 6965.5, p-value < 2.2e-16
+## alternative hypothesis: true location shift is not equal to 0
+## 
+## 
+## $PRE_EDU_INDEX
+## 
+##  Wilcoxon signed rank test with continuity correction
+## 
+## data:  before and after
+## V = 0, p-value < 2.2e-16
+## alternative hypothesis: true location shift is not equal to 0
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\#}
+
+\DocumentationTok{\#\# cohen\textquotesingle{}s d test :}
+\CommentTok{\#Step 1:}
+\CommentTok{\#install.packages("effsize")}
+\FunctionTok{library}\NormalTok{(effsize)}
+
+\CommentTok{\#Step 2:}
+
+\DocumentationTok{\#\# Define a function to perform cohen d Test between pairs of columns}
+\NormalTok{cohen\_d\_test }\OtherTok{\textless{}{-}} \ControlFlowTok{function}\NormalTok{(before, after) \{}
+  \FunctionTok{cohen.d}\NormalTok{(before, after)}
+\NormalTok{\}}
+
+    \DocumentationTok{\#\# Apply paired Paired Samples cohen d Test to each pair of pre and post columns}
+\NormalTok{    results\_cohen\_d\_test }\OtherTok{\textless{}{-}} \FunctionTok{map2}\NormalTok{(edu\_pre\_post\_w\_index\_hcomb[}\FunctionTok{grepl}\NormalTok{(}\StringTok{"PRE"}\NormalTok{, }\FunctionTok{names}\NormalTok{(edu\_pre\_post\_w\_index\_hcomb))],}
+\NormalTok{                    edu\_pre\_post\_w\_index\_hcomb[}\FunctionTok{grepl}\NormalTok{(}\StringTok{"POST"}\NormalTok{, }\FunctionTok{names}\NormalTok{(edu\_pre\_post\_w\_index\_hcomb))],}
+\NormalTok{                    cohen\_d\_test)}
+\FunctionTok{print}\NormalTok{(}\StringTok{"Print the results for column/question wise cohen d Test"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] "Print the results for column/question wise cohen d Test"
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{print}\NormalTok{(results\_cohen\_d\_test)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## $PRE_EDU.1....All.children.aged..6.17..years.in.your.household.are.attending.school...Primary..Middle..Secondary.and.Higher.Secondary.School.
+## 
+## Cohen's d
+## 
+## d estimate: -2.031455 (large)
+## 95 percent confidence interval:
+##     lower     upper 
+## -2.186449 -1.876461 
+## 
+## 
+## $PRE_EDU.2...All.children..18.23..in.your.household.are.currently.attending.post.higher.secondary.education.
+## 
+## Cohen's d
+## 
+## d estimate: -1.823193 (large)
+## 95 percent confidence interval:
+##     lower     upper 
+## -1.972969 -1.673417 
+## 
+## 
+## $PRE_EDU.3...Children.in.our.household.receive.mid.day.meals.at.school.regularly.
+## 
+## Cohen's d
+## 
+## d estimate: -6.120861 (large)
+## 95 percent confidence interval:
+##     lower     upper 
+## -6.420971 -5.820751 
+## 
+## 
+## $PRE_EDU.4...Children.in.my.household.have.benefited.from.government.scholarships..Pre.metric.and.Post.Metric..
+## 
+## Cohen's d
+## 
+## d estimate: -8.189817 (large)
+## 95 percent confidence interval:
+##     lower     upper 
+## -8.575459 -7.804175 
+## 
+## 
+## $PRE_EDU.5...Availability.of.teachers.improved.in.the.village.schools.since.the.implementation.of.PMAGY
+## 
+## Cohen's d
+## 
+## d estimate: -7.591451 (large)
+## 95 percent confidence interval:
+##     lower     upper 
+## -7.952025 -7.230878 
+## 
+## 
+## $PRE_EDU.6...Children.in.my.household.have.access.to.digital.learning.tools.
+## 
+## Cohen's d
+## 
+## d estimate: -3.888045 (large)
+## 95 percent confidence interval:
+##     lower     upper 
+## -4.102042 -3.674048 
+## 
+## 
+## $PRE_EDU.7...Children.in.my.household.actively.participate.in.online.education.programs
+## 
+## Cohen's d
+## 
+## d estimate: -4.355321 (large)
+## 95 percent confidence interval:
+##     lower     upper 
+## -4.586460 -4.124182 
+## 
+## 
+## $PRE_EDU.8...Has.anyone.in.your.family.ever.stopped.going.to.college.because.of.difficulty.in.traveling.or.lack.of.transport.facilities.
+## 
+## Cohen's d
+## 
+## d estimate: 1.042957 (large)
+## 95 percent confidence interval:
+##     lower     upper 
+## 0.9087819 1.1771313 
+## 
+## 
+## $PRE_EDU.9...Has.any.child.from.your.family.left.school.before.completing.it.due.to.financial.reasons.or.household.responsibilities.
+## 
+## Cohen's d
+## 
+## d estimate: 1.025938 (large)
+## 95 percent confidence interval:
+##     lower     upper 
+## 0.8920232 1.1598522 
+## 
+## 
+## $PRE_EDU.10....Students.in.our.household.attend.school.more.regularly.since.PMAGY.
+## 
+## Cohen's d
+## 
+## d estimate: -1.130392 (large)
+## 95 percent confidence interval:
+##      lower      upper 
+## -1.2659623 -0.9948218 
+## 
+## 
+## $PRE_EDU_INDEX
+## 
+## Cohen's d
+## 
+## d estimate: -5.970777 (large)
+## 95 percent confidence interval:
+##     lower     upper 
+## -6.264836 -5.676717
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\DocumentationTok{\#\#\# EDU Section tests COMPLETE}
+\FunctionTok{print}\NormalTok{(}\StringTok{"EDU Section tests COMPLETE"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] "EDU Section tests COMPLETE"
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\DocumentationTok{\#\#\# HN Section tests:}
+
+\FunctionTok{print}\NormalTok{(}\StringTok{"HN Section tests: "}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] "HN Section tests: "
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\#POST PMAGY hn}
+\NormalTok{hn\_POST }\OtherTok{\textless{}{-}}\FunctionTok{data.frame}\NormalTok{(}\FunctionTok{read\_excel}\NormalTok{(post\_pmagy\_file\_path,}\AttributeTok{sheet =} \StringTok{"Sheet1"}\NormalTok{,}\AttributeTok{range =} \StringTok{"AP1:AX487"}\NormalTok{)) }
+\FunctionTok{colnames}\NormalTok{(hn\_POST) }\OtherTok{\textless{}{-}} \FunctionTok{paste}\NormalTok{(}\StringTok{\textquotesingle{}POST\textquotesingle{}}\NormalTok{, }\FunctionTok{colnames}\NormalTok{(hn\_POST), }\AttributeTok{sep =} \StringTok{\textquotesingle{}\_\textquotesingle{}}\NormalTok{)}
+\CommentTok{\#PRE PMAGY hn}
+\NormalTok{hn\_PRE }\OtherTok{\textless{}{-}}\FunctionTok{data.frame}\NormalTok{(}\FunctionTok{read\_excel}\NormalTok{(}\StringTok{"/home/shivs/r{-}analysis{-}pmagy/pre\_pmagy\_obj3\_hn.xlsx"}\NormalTok{,}\AttributeTok{range =} \StringTok{"A1:I487"}\NormalTok{)) }
+\FunctionTok{colnames}\NormalTok{(hn\_PRE) }\OtherTok{\textless{}{-}} \FunctionTok{paste}\NormalTok{(}\StringTok{\textquotesingle{}PRE\textquotesingle{}}\NormalTok{, }\FunctionTok{colnames}\NormalTok{(hn\_PRE), }\AttributeTok{sep =} \StringTok{\textquotesingle{}\_\textquotesingle{}}\NormalTok{)}
+
+
+\CommentTok{\#calculate Cronbach\textquotesingle{}s Alpha:}
+\FunctionTok{print}\NormalTok{(}\FunctionTok{cronbach.alpha}\NormalTok{(hn\_POST))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+## Cronbach's alpha for the 'hn_POST' data-set
+## 
+## Items: 9
+## Sample units: 486
+## alpha: 0.078
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{print}\NormalTok{(}\FunctionTok{cronbach.alpha}\NormalTok{(hn\_PRE))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+## Cronbach's alpha for the 'hn_PRE' data-set
+## 
+## Items: 9
+## Sample units: 486
+## alpha: -0.133
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\#}
+
+\CommentTok{\#Variance Inflation Factor (VIF):}
+\FunctionTok{library}\NormalTok{(car)}
+\FunctionTok{library}\NormalTok{(caTools)}
+
+\CommentTok{\# Fit a regression model on post data}
+\NormalTok{hn\_POST\_w\_index }\OtherTok{\textless{}{-}}\FunctionTok{data.frame}\NormalTok{(}\FunctionTok{read\_excel}\NormalTok{(post\_pmagy\_file\_path,}\AttributeTok{sheet =} \StringTok{"Sheet1"}\NormalTok{,}\AttributeTok{range =} \StringTok{"AP1:AY487"}\NormalTok{))}
+\FunctionTok{colnames}\NormalTok{(hn\_POST\_w\_index) }\OtherTok{\textless{}{-}} \FunctionTok{paste}\NormalTok{(}\StringTok{\textquotesingle{}POST\textquotesingle{}}\NormalTok{, }\FunctionTok{colnames}\NormalTok{(hn\_POST\_w\_index), }\AttributeTok{sep =} \StringTok{\textquotesingle{}\_\textquotesingle{}}\NormalTok{)}
+
+\NormalTok{model\_all }\OtherTok{\textless{}{-}} \FunctionTok{lm}\NormalTok{(POST\_HN\_INDEX }\SpecialCharTok{\textasciitilde{}}\NormalTok{ ., }\AttributeTok{data =}\NormalTok{ hn\_POST\_w\_index)}
+\CommentTok{\# Calculate VIF}
+\NormalTok{vif\_results }\OtherTok{\textless{}{-}}\NormalTok{ car}\SpecialCharTok{::}\FunctionTok{vif}\NormalTok{(model\_all)}
+
+\FunctionTok{print}\NormalTok{(}\StringTok{"VIF results for post data:"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] "VIF results for post data:"
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{print}\NormalTok{(vif\_results)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## POST_HN.1...The.Anganwadi.Centre.in.your.village.is.functioning.properly.in.terms.of.building.condition..staff.availability..and.services 
+##                                                                                                                                  1.035161 
+##                                       POST_HN.2...Children..0.5.years..in.your.household.are.healthy.and.generally.free.from.any.illness. 
+##                                                                                                                                  1.020161 
+##                                                        POST_HN.3....Health.centres.in.the.village.are.safe.and.accessible.for.childbirth. 
+##                                                                                                                                  1.017628 
+##                                                      POST_HN.4....Vaccination.services.for.children.under.1.are.available.in.the.village. 
+##                                                                                                                                  1.009857 
+##                                                                   POST_HN.5....The.nearest.health.centre.is.easy.to.access.from.our.home. 
+##                                                                                                                                  1.007475 
+##                                                              POST_HN.7....Ambulance.services.in.the.village.are.available.and.functional. 
+##                                                                                                                                  1.049712 
+##                                        POST_HN.8...Pregnant.women.in.the.household.received.adequate.antenatal.check.ups.during.pregnancy 
+##                                                                                                                                  1.008997 
+##                                                POST_HN.9..Proper.treatment.was.provided.for.managing.chronic.illnesses.in.your.household. 
+##                                                                                                                                  1.011251 
+##              POST_HN.10....Your.household.receives.proper.treatment.for.communicable.diseases.such.as.malaria..TB..or.rabies.when.needed. 
+##                                                                                                                                  1.020488
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Fit a regression model on pre data}
+\NormalTok{hn\_PRE\_w\_index }\OtherTok{\textless{}{-}}\FunctionTok{data.frame}\NormalTok{(}\FunctionTok{read\_excel}\NormalTok{(}\StringTok{"/home/shivs/r{-}analysis{-}pmagy/pre\_pmagy\_obj3\_hn.xlsx"}\NormalTok{,}\AttributeTok{range =} \StringTok{"A1:J487"}\NormalTok{))}
+\FunctionTok{colnames}\NormalTok{(hn\_PRE\_w\_index) }\OtherTok{\textless{}{-}} \FunctionTok{paste}\NormalTok{(}\StringTok{\textquotesingle{}PRE\textquotesingle{}}\NormalTok{, }\FunctionTok{colnames}\NormalTok{(hn\_PRE\_w\_index), }\AttributeTok{sep =} \StringTok{\textquotesingle{}\_\textquotesingle{}}\NormalTok{)}
+
+\NormalTok{model\_all }\OtherTok{\textless{}{-}} \FunctionTok{lm}\NormalTok{(PRE\_HN\_INDEX }\SpecialCharTok{\textasciitilde{}}\NormalTok{ ., }\AttributeTok{data =}\NormalTok{ hn\_PRE\_w\_index)}
+
+\CommentTok{\# Calculate VIF}
+\NormalTok{vif\_results }\OtherTok{\textless{}{-}}\NormalTok{ car}\SpecialCharTok{::}\FunctionTok{vif}\NormalTok{(model\_all)}
+\FunctionTok{print}\NormalTok{(}\StringTok{"VIF results for pre data:"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] "VIF results for pre data:"
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{print}\NormalTok{(vif\_results)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## PRE_HN.1...The.Anganwadi.Centre.in.your.village.is.functioning.properly.in.terms.of.building.condition..staff.availability..and.services 
+##                                                                                                                                 1.025391 
+##                                       PRE_HN.2...Children..0.5.years..in.your.household.are.healthy.and.generally.free.from.any.illness. 
+##                                                                                                                                 1.019345 
+##                                                        PRE_HN.3....Health.centres.in.the.village.are.safe.and.accessible.for.childbirth. 
+##                                                                                                                                 1.012730 
+##                                                      PRE_HN.4....Vaccination.services.for.children.under.1.are.available.in.the.village. 
+##                                                                                                                                 1.005464 
+##                                                                   PRE_HN.5....The.nearest.health.centre.is.easy.to.access.from.our.home. 
+##                                                                                                                                 1.008995 
+##                                                              PRE_HN.7....Ambulance.services.in.the.village.are.available.and.functional. 
+##                                                                                                                                 1.008979 
+##                                        PRE_HN.8...Pregnant.women.in.the.household.received.adequate.antenatal.check.ups.during.pregnancy 
+##                                                                                                                                 1.022875 
+##                                                PRE_HN.9..Proper.treatment.was.provided.for.managing.chronic.illnesses.in.your.household. 
+##                                                                                                                                 1.016848 
+##              PRE_HN.10....Your.household.receives.proper.treatment.for.communicable.diseases.such.as.malaria..TB..or.rabies.when.needed. 
+##                                                                                                                                 1.014546
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\#TODO: Visualizing VIF Values from here https://www.geeksforgeeks.org/r{-}language/vif{-}function{-}in{-}r/}
+\CommentTok{\#}
+
+\CommentTok{\# Using theShapiro–Wilk Test :}
+\FunctionTok{print}\NormalTok{(}\StringTok{"Shapiro–Wilk Test results for pre data:"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] "Shapiro–Wilk Test results for pre data:"
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{print}\NormalTok{(}\FunctionTok{shapiro.test}\NormalTok{(hn\_PRE\_w\_index}\SpecialCharTok{$}\NormalTok{PRE\_HN\_INDEX))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+##  Shapiro-Wilk normality test
+## 
+## data:  hn_PRE_w_index$PRE_HN_INDEX
+## W = 0.98482, p-value = 5.83e-05
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{print}\NormalTok{(}\StringTok{"Shapiro–Wilk Test results for post data:"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] "Shapiro–Wilk Test results for post data:"
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{print}\NormalTok{(}\FunctionTok{shapiro.test}\NormalTok{(hn\_POST\_w\_index}\SpecialCharTok{$}\NormalTok{POST\_HN\_INDEX))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+##  Shapiro-Wilk normality test
+## 
+## data:  hn_POST_w_index$POST_HN_INDEX
+## W = 0.97376, p-value = 1.189e-07
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\#}
+
+\CommentTok{\# Paired Samples Wilcoxon Test : }
+
+\CommentTok{\# combine two data frames horizontally}
+\NormalTok{hn\_pre\_post\_w\_index\_hcomb }\OtherTok{\textless{}{-}} \FunctionTok{cbind}\NormalTok{(hn\_PRE\_w\_index, hn\_POST\_w\_index)}
+
+\CommentTok{\# \# Define a function to perform paired Paired Samples Wilcoxon Test between pairs of columns}
+\NormalTok{paired\_wilcoxon\_test }\OtherTok{\textless{}{-}} \ControlFlowTok{function}\NormalTok{(before, after) \{}
+  \FunctionTok{wilcox.test}\NormalTok{(before, after, }\AttributeTok{paired =} \ConstantTok{TRUE}\NormalTok{)}
+\NormalTok{\}}
+
+    \CommentTok{\# \# Apply paired Paired Samples Wilcoxon Test to each pair of pre and post columns}
+\NormalTok{    results\_wilcoxon\_test }\OtherTok{\textless{}{-}} \FunctionTok{map2}\NormalTok{(hn\_pre\_post\_w\_index\_hcomb[}\FunctionTok{grepl}\NormalTok{(}\StringTok{"PRE"}\NormalTok{, }\FunctionTok{names}\NormalTok{(hn\_pre\_post\_w\_index\_hcomb))],}
+\NormalTok{                    hn\_pre\_post\_w\_index\_hcomb[}\FunctionTok{grepl}\NormalTok{(}\StringTok{"POST"}\NormalTok{, }\FunctionTok{names}\NormalTok{(hn\_pre\_post\_w\_index\_hcomb))],}
+\NormalTok{                    paired\_wilcoxon\_test)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Warning in wilcox.test.default(before, after, paired = TRUE): cannot compute
+## exact p-value with zeroes
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{tryCatch}\NormalTok{(\{}
+  \CommentTok{\# Code that may produce a warning}
+\CommentTok{\#   Warning message:}
+\CommentTok{\# In wilcox.test.default(before, after, paired = TRUE) :}
+\CommentTok{\#   cannot compute exact p{-}value with zeroes}
+
+
+\NormalTok{\}, }\AttributeTok{warning =} \ControlFlowTok{function}\NormalTok{(w) \{}
+  \CommentTok{\# Code to handle the warning}
+  \FunctionTok{cat}\NormalTok{(}\StringTok{"A warning occurred }\SpecialCharTok{\textbackslash{}n}\StringTok{"}\NormalTok{)}
+  \FunctionTok{return}\NormalTok{(}\ConstantTok{NaN}\NormalTok{) }\CommentTok{\# Return a specific value in case of a warning}
+\NormalTok{\})}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## NULL
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# \# Print the results}
+\FunctionTok{print}\NormalTok{(}\StringTok{"Print the results for column/question wise Paired Samples Wilcoxon Test"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] "Print the results for column/question wise Paired Samples Wilcoxon Test"
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{print}\NormalTok{(results\_wilcoxon\_test)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## $PRE_HN.1...The.Anganwadi.Centre.in.your.village.is.functioning.properly.in.terms.of.building.condition..staff.availability..and.services
+## 
+##  Wilcoxon signed rank test with continuity correction
+## 
+## data:  before and after
+## V = 0, p-value = NA
+## alternative hypothesis: true location shift is not equal to 0
+## 
+## 
+## $PRE_HN.2...Children..0.5.years..in.your.household.are.healthy.and.generally.free.from.any.illness.
+## 
+##  Wilcoxon signed rank test with continuity correction
+## 
+## data:  before and after
+## V = 441, p-value < 2.2e-16
+## alternative hypothesis: true location shift is not equal to 0
+## 
+## 
+## $PRE_HN.3....Health.centres.in.the.village.are.safe.and.accessible.for.childbirth.
+## 
+##  Wilcoxon signed rank test with continuity correction
+## 
+## data:  before and after
+## V = 1148, p-value < 2.2e-16
+## alternative hypothesis: true location shift is not equal to 0
+## 
+## 
+## $PRE_HN.4....Vaccination.services.for.children.under.1.are.available.in.the.village.
+## 
+##  Wilcoxon signed rank test with continuity correction
+## 
+## data:  before and after
+## V = 5223.5, p-value < 2.2e-16
+## alternative hypothesis: true location shift is not equal to 0
+## 
+## 
+## $PRE_HN.5....The.nearest.health.centre.is.easy.to.access.from.our.home.
+## 
+##  Wilcoxon signed rank test with continuity correction
+## 
+## data:  before and after
+## V = 9015.5, p-value < 2.2e-16
+## alternative hypothesis: true location shift is not equal to 0
+## 
+## 
+## $PRE_HN.7....Ambulance.services.in.the.village.are.available.and.functional.
+## 
+##  Wilcoxon signed rank test with continuity correction
+## 
+## data:  before and after
+## V = 0, p-value < 2.2e-16
+## alternative hypothesis: true location shift is not equal to 0
+## 
+## 
+## $PRE_HN.8...Pregnant.women.in.the.household.received.adequate.antenatal.check.ups.during.pregnancy
+## 
+##  Wilcoxon signed rank test with continuity correction
+## 
+## data:  before and after
+## V = 11788, p-value < 2.2e-16
+## alternative hypothesis: true location shift is not equal to 0
+## 
+## 
+## $PRE_HN.9..Proper.treatment.was.provided.for.managing.chronic.illnesses.in.your.household.
+## 
+##  Wilcoxon signed rank test with continuity correction
+## 
+## data:  before and after
+## V = 15186, p-value < 2.2e-16
+## alternative hypothesis: true location shift is not equal to 0
+## 
+## 
+## $PRE_HN.10....Your.household.receives.proper.treatment.for.communicable.diseases.such.as.malaria..TB..or.rabies.when.needed.
+## 
+##  Wilcoxon signed rank test with continuity correction
+## 
+## data:  before and after
+## V = 12426, p-value < 2.2e-16
+## alternative hypothesis: true location shift is not equal to 0
+## 
+## 
+## $PRE_HN_INDEX
+## 
+##  Wilcoxon signed rank test with continuity correction
+## 
+## data:  before and after
+## V = 2, p-value < 2.2e-16
+## alternative hypothesis: true location shift is not equal to 0
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\#}
+
+\DocumentationTok{\#\# cohen\textquotesingle{}s d test :}
+\CommentTok{\#Step 1:}
+\CommentTok{\# install.packages("effsize")}
+\FunctionTok{library}\NormalTok{(effsize)}
+
+\CommentTok{\#Step 2:}
+
+\DocumentationTok{\#\# Define a function to perform cohen d Test between pairs of columns}
+\NormalTok{cohen\_d\_test }\OtherTok{\textless{}{-}} \ControlFlowTok{function}\NormalTok{(before, after) \{}
+  \FunctionTok{cohen.d}\NormalTok{(before, after)}
+\NormalTok{\}}
+
+    \DocumentationTok{\#\# Apply paired Paired Samples cohen d Test to each pair of pre and post columns}
+\NormalTok{    results\_cohen\_d\_test }\OtherTok{\textless{}{-}} \FunctionTok{map2}\NormalTok{(hn\_pre\_post\_w\_index\_hcomb[}\FunctionTok{grepl}\NormalTok{(}\StringTok{"PRE"}\NormalTok{, }\FunctionTok{names}\NormalTok{(hn\_pre\_post\_w\_index\_hcomb))],}
+\NormalTok{                    hn\_pre\_post\_w\_index\_hcomb[}\FunctionTok{grepl}\NormalTok{(}\StringTok{"POST"}\NormalTok{, }\FunctionTok{names}\NormalTok{(hn\_pre\_post\_w\_index\_hcomb))],}
+\NormalTok{                    cohen\_d\_test)}
+\FunctionTok{print}\NormalTok{(}\StringTok{"Print the results for column/question wise cohen d Test"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] "Print the results for column/question wise cohen d Test"
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{print}\NormalTok{(results\_cohen\_d\_test)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## $PRE_HN.1...The.Anganwadi.Centre.in.your.village.is.functioning.properly.in.terms.of.building.condition..staff.availability..and.services
+## 
+## Cohen's d
+## 
+## d estimate: 0 (negligible)
+## 95 percent confidence interval:
+##      lower      upper 
+## -0.1258888  0.1258888 
+## 
+## 
+## $PRE_HN.2...Children..0.5.years..in.your.household.are.healthy.and.generally.free.from.any.illness.
+## 
+## Cohen's d
+## 
+## d estimate: -2.691239 (large)
+## 95 percent confidence interval:
+##     lower     upper 
+## -2.865009 -2.517470 
+## 
+## 
+## $PRE_HN.3....Health.centres.in.the.village.are.safe.and.accessible.for.childbirth.
+## 
+## Cohen's d
+## 
+## d estimate: -2.333266 (large)
+## 95 percent confidence interval:
+##     lower     upper 
+## -2.496461 -2.170070 
+## 
+## 
+## $PRE_HN.4....Vaccination.services.for.children.under.1.are.available.in.the.village.
+## 
+## Cohen's d
+## 
+## d estimate: -1.334801 (large)
+## 95 percent confidence interval:
+##     lower     upper 
+## -1.474004 -1.195598 
+## 
+## 
+## $PRE_HN.5....The.nearest.health.centre.is.easy.to.access.from.our.home.
+## 
+## Cohen's d
+## 
+## d estimate: -1.240009 (large)
+## 95 percent confidence interval:
+##     lower     upper 
+## -1.377465 -1.102554 
+## 
+## 
+## $PRE_HN.7....Ambulance.services.in.the.village.are.available.and.functional.
+## 
+## Cohen's d
+## 
+## d estimate: -4.632535 (large)
+## 95 percent confidence interval:
+##     lower     upper 
+## -4.874116 -4.390955 
+## 
+## 
+## $PRE_HN.8...Pregnant.women.in.the.household.received.adequate.antenatal.check.ups.during.pregnancy
+## 
+## Cohen's d
+## 
+## d estimate: -1.246987 (large)
+## 95 percent confidence interval:
+##     lower     upper 
+## -1.384567 -1.109406 
+## 
+## 
+## $PRE_HN.9..Proper.treatment.was.provided.for.managing.chronic.illnesses.in.your.household.
+## 
+## Cohen's d
+## 
+## d estimate: -0.7357716 (medium)
+## 95 percent confidence interval:
+##      lower      upper 
+## -0.8658502 -0.6056931 
+## 
+## 
+## $PRE_HN.10....Your.household.receives.proper.treatment.for.communicable.diseases.such.as.malaria..TB..or.rabies.when.needed.
+## 
+## Cohen's d
+## 
+## d estimate: -1.087244 (large)
+## 95 percent confidence interval:
+##      lower      upper 
+## -1.2221138 -0.9523751 
+## 
+## 
+## $PRE_HN_INDEX
+## 
+## Cohen's d
+## 
+## d estimate: -4.907208 (large)
+## 95 percent confidence interval:
+##     lower     upper 
+## -5.159303 -4.655113
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\DocumentationTok{\#\#\# HN Section tests COMPLETE}
+\FunctionTok{print}\NormalTok{(}\StringTok{"HN Section tests COMPLETE"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] "HN Section tests COMPLETE"
+\end{verbatim}
+
+\end{document}
