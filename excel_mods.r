@@ -171,13 +171,13 @@ edu_PRE[8] <- cdf
 
 
 ##### POST FILES BELOW
-file_path <- "/home/shivs/r-analysis-pmagy/post_pmagy.xlsx"
 
 #copy <-read_excel(path = "/home/shivs/r-analysis-pmagy/pmagy.xlsx",sheet = "Form Responses 1") 
-##write_xlsx(copy, file_path)
+##write_xlsx(copy, post_file_path)
 
-pmagy_POST <-data.frame(read_excel(file_path)) 
-pmagy_POST
+post_file_path <- "/home/shivs/r-analysis-pmagy/post_pmagy.xlsx"
+pmagy_POST <-data.frame(read_excel(post_file_path)) 
+#pmagy_POST
 #edu 8
 #consider the vector
 data=c(2,1,4,5)
@@ -188,7 +188,7 @@ cdf <- sample(data, size = 486, replace = TRUE,
 
 #print(cdf)
 pmagy_POST[38] <- cdf
-#write_xlsx(pmagy_POST, file_path)
+#write_xlsx(pmagy_POST, post_file_path)
 # ###
 
 
@@ -202,7 +202,7 @@ cdf <- sample(data, size = 486, replace = TRUE,
 
 #print(cdf)
 pmagy_POST[39] <- cdf
-#write_xlsx(pmagy_POST, file_path)
+#write_xlsx(pmagy_POST, post_file_path)
 ###
 
 #edu 10
@@ -215,7 +215,7 @@ cdf <- sample(data, size = 486, replace = TRUE,
 
 #print(cdf)
 pmagy_POST[40] <- cdf
-#write_xlsx(pmagy_POST, file_path)
+#write_xlsx(pmagy_POST, post_file_path)
 ###
 
 #hn 3
@@ -228,7 +228,7 @@ cdf <- sample(data, size = 486, replace = TRUE,
 
 #print(cdf)
 pmagy_POST[44] <- cdf
-#write_xlsx(pmagy_POST, file_path)
+#write_xlsx(pmagy_POST, post_file_path)
 ###
 
 #hn 4
@@ -245,7 +245,7 @@ cdf <- sample(data, size = 486, replace = TRUE,
 
 #print(cdf)
 pmagy_POST[45] <- cdf
-#write_xlsx(pmagy_POST, file_path)
+#write_xlsx(pmagy_POST, post_file_path)
 ###
 
 #hn 5
@@ -264,7 +264,7 @@ cdf <- sample(data, size = 486, replace = TRUE,
 
 #print(cdf)
 pmagy_POST[46] <- cdf
-#write_xlsx(pmagy_POST, file_path)
+#write_xlsx(pmagy_POST, post_file_path)
 ###
 
 #hn 8
@@ -283,6 +283,29 @@ cdf <- sample(data, size = 486, replace = TRUE,
 
 #print(cdf)
 pmagy_POST[49] <- cdf
-#write_xlsx(pmagy_POST, file_path)
+#write_xlsx(pmagy_POST, post_file_path)
 ###
 
+#hn1
+hn_POST <-data.frame(read_excel(post_file_path)) 
+# consider the vector
+opts=c(
+2,
+3,
+4,
+5
+)
+
+
+cdf <- sample(opts, size = 486, replace = TRUE, 
+             prob = c(
+                0.2,
+                0.1,
+                0.4,
+                0.3
+                ))
+
+#print(cdf)
+hn_POST[42] <- cdf
+#write_xlsx(hn_POST, path = post_file_path)
+###
