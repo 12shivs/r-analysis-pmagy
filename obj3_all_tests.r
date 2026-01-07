@@ -68,13 +68,13 @@ paired_wilcoxon_test <- function(before, after) {
 }
 
 # # Apply paired Paired Samples Wilcoxon Test to each pair of pre and post columns
-results_wilcoxon_test <- map2(edu_pre_post_w_index_hcomb[grepl("PRE", names(edu_pre_post_w_index_hcomb))],
-                edu_pre_post_w_index_hcomb[grepl("POST", names(edu_pre_post_w_index_hcomb))],
-                paired_wilcoxon_test)
+# results_wilcoxon_test <- map2(edu_pre_post_w_index_hcomb[grepl("PRE", names(edu_pre_post_w_index_hcomb))],
+#                 edu_pre_post_w_index_hcomb[grepl("POST", names(edu_pre_post_w_index_hcomb))],
+#                 paired_wilcoxon_test)
 
-# # Print the results
-print("Print the results for column/question wise Paired Samples Wilcoxon Test")
-print(results_wilcoxon_test)
+# # # Print the results
+# print("Print the results for column/question wise Paired Samples Wilcoxon Test")
+# print(results_wilcoxon_test)
 #
 
 ## cohen's d test :
@@ -86,11 +86,10 @@ library(effsize)
 
 ## Define a function to perform cohen d Test between pairs of columns
 cohen_d_test <- function(before, after) {
-  wilcox.test(before, after, paired = TRUE)
   cohen.d(before, after)
 }
 
-    ## Apply paired Paired Samples Wilcoxon Test to each pair of pre and post columns
+    ## Apply paired Paired Samples cohen d Test to each pair of pre and post columns
     results_cohen_d_test <- map2(edu_pre_post_w_index_hcomb[grepl("PRE", names(edu_pre_post_w_index_hcomb))],
                     edu_pre_post_w_index_hcomb[grepl("POST", names(edu_pre_post_w_index_hcomb))],
                     cohen_d_test)
@@ -163,26 +162,26 @@ paired_wilcoxon_test <- function(before, after) {
 }
 
     # # Apply paired Paired Samples Wilcoxon Test to each pair of pre and post columns
-    results_wilcoxon_test <- map2(hn_pre_post_w_index_hcomb[grepl("PRE", names(hn_pre_post_w_index_hcomb))],
-                    hn_pre_post_w_index_hcomb[grepl("POST", names(hn_pre_post_w_index_hcomb))],
-                    paired_wilcoxon_test)
+#     results_wilcoxon_test <- map2(hn_pre_post_w_index_hcomb[grepl("PRE", names(hn_pre_post_w_index_hcomb))],
+#                     hn_pre_post_w_index_hcomb[grepl("POST", names(hn_pre_post_w_index_hcomb))],
+#                     paired_wilcoxon_test)
 
-tryCatch({
-  # Code that may produce a warning
-#   Warning message:
-# In wilcox.test.default(before, after, paired = TRUE) :
-#   cannot compute exact p-value with zeroes
+# tryCatch({
+#   # Code that may produce a warning
+# #   Warning message:
+# # In wilcox.test.default(before, after, paired = TRUE) :
+# #   cannot compute exact p-value with zeroes
 
 
-}, warning = function(w) {
-  # Code to handle the warning
-  cat("A warning occurred \n")
-  return(NaN) # Return a specific value in case of a warning
-})
+# }, warning = function(w) {
+#   # Code to handle the warning
+#   cat("A warning occurred \n")
+#   return(NaN) # Return a specific value in case of a warning
+# })
 
-# # Print the results
-print("Print the results for column/question wise Paired Samples Wilcoxon Test")
-print(results_wilcoxon_test)
+# # # Print the results
+# print("Print the results for column/question wise Paired Samples Wilcoxon Test")
+# print(results_wilcoxon_test)
 #
 
 ## cohen's d test :
@@ -194,11 +193,10 @@ library(effsize)
 
 ## Define a function to perform cohen d Test between pairs of columns
 cohen_d_test <- function(before, after) {
-  wilcox.test(before, after, paired = TRUE)
   cohen.d(before, after)
 }
 
-    ## Apply paired Paired Samples Wilcoxon Test to each pair of pre and post columns
+    ## Apply paired Paired Samples cohen d Test to each pair of pre and post columns
     results_cohen_d_test <- map2(hn_pre_post_w_index_hcomb[grepl("PRE", names(hn_pre_post_w_index_hcomb))],
                     hn_pre_post_w_index_hcomb[grepl("POST", names(hn_pre_post_w_index_hcomb))],
                     cohen_d_test)

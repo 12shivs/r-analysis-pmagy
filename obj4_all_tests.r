@@ -85,7 +85,6 @@ library(effsize)
 
 ## Define a function to perform cohen d Test between pairs of columns
 cohen_d_test <- function(before, after) {
-  wilcox.test(before, after, paired = TRUE)
   cohen.d(before, after)
 }
 
