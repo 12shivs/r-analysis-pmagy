@@ -21,6 +21,7 @@ pmagy_POST <-read_excel(post_pmagy_file_path,sheet = "Sheet1")
 library(car)
 library(caTools)
 
+#
 # # Fit a regression model on post data
 # edu_POST_w_index <-data.frame(read_excel(post_pmagy_file_path,sheet = "Sheet1",range = "AE1:AO487"))
 # colnames(edu_POST_w_index) <- paste('POST', colnames(edu_POST_w_index), sep = '_')
@@ -36,7 +37,7 @@ library(caTools)
 
 # # Set a threshold to indicate high VIF
 # high_vif_threshold <- 5
-
+#
 # # Create a ggplot bar plot to visualize VIF values
 # ggplot(vif_df, aes(x = Variable, y = VIF)) +
 #   geom_bar(stat = "identity", fill = "steelblue") +
@@ -47,16 +48,20 @@ library(caTools)
 #        x = "Variable") +
 #   theme_minimal() +
 #   theme(axis.text.x = element_text(angle = 45, hjust = 1))
+#
 
 
+#
 # edu_POST_w_index <-read_excel(post_pmagy_file_path,sheet = "Sheet1",range = "AE1:AO487")
 # colnames(edu_POST_w_index) <- paste('POST', colnames(edu_POST_w_index), sep = '_')
 # edu_PRE_w_index <-read_excel("/home/shivs/r-analysis-pmagy/pre_pmagy_obj3_edu.xlsx",range = "A1:K487")
 # colnames(edu_PRE_w_index) <- paste('PRE', colnames(edu_PRE_w_index), sep = '_')
 #hist(edu_PRE_w_index$PRE_EDU_INDEX, col='coral2')
 #hist(edu_POST_w_index$POST_EDU_INDEX, col='coral2')
+#
 
 
+#
 # hn_POST_w_index <-data.frame(read_excel(post_pmagy_file_path,sheet = "Sheet1",range = "AP1:AY487"))
 # colnames(hn_POST_w_index) <- paste('POST', colnames(hn_POST_w_index), sep = '_')
 
@@ -65,15 +70,78 @@ library(caTools)
 
 #hist(hn_PRE_w_index$PRE_HN_INDEX, col='coral2')
 #hist(hn_POST_w_index$POST_HN_INDEX, col='coral2')
+#
 
 
-lisd_POST_w_index <-data.frame(read_excel(post_pmagy_file_path,sheet = "Sheet1",range = "CJ1:CO487"))
-colnames(lisd_POST_w_index) <- paste('POST', colnames(lisd_POST_w_index), sep = '_')
 
-lisd_PRE_w_index <-data.frame(read_excel("/home/shivs/r-analysis-pmagy/pre_pmagy_obj4_lisd.xlsx",range = "A1:F487"))
-colnames(lisd_PRE_w_index) <- paste('PRE', colnames(lisd_PRE_w_index), sep = '_')
+#
+# lisd_POST_w_index <-data.frame(read_excel(post_pmagy_file_path,sheet = "Sheet1",range = "CJ1:CO487"))
+# colnames(lisd_POST_w_index) <- paste('POST', colnames(lisd_POST_w_index), sep = '_')
+
+# lisd_PRE_w_index <-data.frame(read_excel("/home/shivs/r-analysis-pmagy/pre_pmagy_obj4_lisd.xlsx",range = "A1:F487"))
+# colnames(lisd_PRE_w_index) <- paste('PRE', colnames(lisd_PRE_w_index), sep = '_')
 
 
 #hist(lisd_PRE_w_index$PRE_LISD_INDEX, col='coral2')
 #hist(lisd_POST_w_index$POST_LISD_INDEX, col='coral2')
+#
 
+
+
+
+# hn_POST_w_index <-data.frame(read_excel(post_pmagy_file_path,sheet = "Sheet1",range = "AP1:AY487"))
+# colnames(hn_POST_w_index) <- paste('POST', colnames(hn_POST_w_index), sep = '_')
+
+# hn_PRE_w_index <-data.frame(read_excel("/home/shivs/r-analysis-pmagy/pre_pmagy_obj3_hn.xlsx",range = "A1:J487"))
+# colnames(hn_PRE_w_index) <- paste('PRE', colnames(hn_PRE_w_index), sep = '_')
+
+# hn_pre_post_w_index_hcomb <- cbind(hn_PRE_w_index, hn_POST_w_index)
+
+# boxplot(hn_PRE_w_index$PRE_HN_INDEX ~ hn_POST_w_index$POST_HN_INDEX,
+# data = hn_pre_post_w_index_hcomb,
+# main = "...",
+# xlab = "POST_HN_INDEX",
+# ylab = "PRE_HN_INDEX",
+# col = "steelblue",
+# border = "black")
+
+
+
+
+
+# edu_POST_w_index <-data.frame(read_excel(post_pmagy_file_path,sheet = "Sheet1",range = "AE1:AO487"))
+# colnames(edu_POST_w_index) <- paste('POST', colnames(edu_POST_w_index), sep = '_')
+
+# edu_PRE_w_index <-data.frame(read_excel("/home/shivs/r-analysis-pmagy/pre_pmagy_obj3_edu.xlsx",range = "A1:K487"))
+# colnames(edu_PRE_w_index) <- paste('PRE', colnames(edu_PRE_w_index), sep = '_')
+
+# edu_pre_post_w_index_hcomb <- cbind(edu_PRE_w_index, edu_POST_w_index)
+
+# boxplot(edu_pre_post_w_index_hcomb$PRE_EDU_INDEX ~ edu_pre_post_w_index_hcomb$POST_EDU_INDEX,
+# data = edu_pre_post_w_index_hcomb,
+# main = "...",
+# xlab = "POST_EDU_INDEX",
+# ylab = "PRE_EDU_INDEX",
+# col = "steelblue",
+# border = "black")
+
+
+
+
+
+
+# lisd_POST_w_index <-data.frame(read_excel(post_pmagy_file_path,sheet = "Sheet1",range = "CJ1:CO487"))
+# colnames(lisd_POST_w_index) <- paste('POST', colnames(lisd_POST_w_index), sep = '_')
+
+# lisd_PRE_w_index <-data.frame(read_excel("/home/shivs/r-analysis-pmagy/pre_pmagy_obj4_lisd.xlsx",range = "A1:F487"))
+# colnames(lisd_PRE_w_index) <- paste('PRE', colnames(lisd_PRE_w_index), sep = '_')
+
+# lisd_pre_post_w_index_hcomb <- cbind(lisd_PRE_w_index, lisd_POST_w_index)
+
+# boxplot(lisd_pre_post_w_index_hcomb$PRE_LISD_INDEX ~ lisd_pre_post_w_index_hcomb$POST_LISD_INDEX,
+# data = lisd_pre_post_w_index_hcomb,
+# main = "...",
+# xlab = "POST_LISD_INDEX",
+# ylab = "PRE_LISD_INDEX",
+# col = "steelblue",
+# border = "black")
