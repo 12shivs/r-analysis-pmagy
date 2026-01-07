@@ -5,6 +5,30 @@ library(writexl)
 
  ##### PRE FILES BELOW
 
+#hn1
+hn_PRE <-data.frame(read_excel("/home/shivs/r-analysis-pmagy/pre_pmagy_obj3_hn.xlsx")) 
+# consider the vector
+opts=c(
+1,
+2,
+4,
+5
+)
+
+
+cdf <- sample(opts, size = 486, replace = TRUE, 
+             prob = c(
+                0.2,
+                0.4,
+                0.3,
+                0.1
+                ))
+
+#print(cdf)
+hn_PRE[1] <- cdf
+#write_xlsx(hn_PRE, path = "/home/shivs/r-analysis-pmagy/pre_pmagy_obj3_hn.xlsx")
+#
+
 #hn3
 hn_PRE <-data.frame(read_excel("/home/shivs/r-analysis-pmagy/pre_pmagy_obj3_hn.xlsx")) 
 # consider the vector
