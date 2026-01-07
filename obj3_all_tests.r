@@ -60,7 +60,7 @@ print(shapiro.test(edu_POST_w_index$POST_EDU_INDEX))
 # Paired Samples Wilcoxon Test : 
 
 # combine two data frames horizontally
-edu_pre_post_hcomb <- cbind(edu_PRE, edu_POST)
+edu_pre_post_w_index_hcomb <- cbind(edu_PRE_w_index, edu_POST_w_index)
 
 # # Define a function to perform paired Paired Samples Wilcoxon Test between pairs of columns
 paired_wilcoxon_test <- function(before, after) {
@@ -68,8 +68,8 @@ paired_wilcoxon_test <- function(before, after) {
 }
 
 # # Apply paired Paired Samples Wilcoxon Test to each pair of pre and post columns
-results_wilcoxon_test <- map2(edu_pre_post_hcomb[grepl("PRE", names(edu_pre_post_hcomb))],
-                edu_pre_post_hcomb[grepl("POST", names(edu_pre_post_hcomb))],
+results_wilcoxon_test <- map2(edu_pre_post_w_index_hcomb[grepl("PRE", names(edu_pre_post_w_index_hcomb))],
+                edu_pre_post_w_index_hcomb[grepl("POST", names(edu_pre_post_w_index_hcomb))],
                 paired_wilcoxon_test)
 
 # # Print the results
@@ -135,7 +135,7 @@ print(shapiro.test(hn_POST_w_index$POST_HN_INDEX))
 # Paired Samples Wilcoxon Test : 
 
 # combine two data frames horizontally
-hn_pre_post_hcomb <- cbind(hn_PRE, hn_POST)
+hn_pre_post_w_index_hcomb <- cbind(hn_PRE_w_index, hn_PRE_w_index)
 
 # # Define a function to perform paired Paired Samples Wilcoxon Test between pairs of columns
 paired_wilcoxon_test <- function(before, after) {
@@ -143,12 +143,15 @@ paired_wilcoxon_test <- function(before, after) {
 }
 
     # # Apply paired Paired Samples Wilcoxon Test to each pair of pre and post columns
-    results_wilcoxon_test <- map2(hn_pre_post_hcomb[grepl("PRE", names(hn_pre_post_hcomb))],
-                    hn_pre_post_hcomb[grepl("POST", names(hn_pre_post_hcomb))],
+    results_wilcoxon_test <- map2(hn_pre_post_w_index_hcomb[grepl("PRE", names(hn_pre_post_w_index_hcomb))],
+                    hn_pre_post_w_index_hcomb[grepl("POST", names(hn_pre_post_w_index_hcomb))],
                     paired_wilcoxon_test)
 
 tryCatch({
   # Code that may produce a warning
+#   Warning message:
+# In wilcox.test.default(before, after, paired = TRUE) :
+#   cannot compute exact p-value with zeroes
 
 
 }, warning = function(w) {

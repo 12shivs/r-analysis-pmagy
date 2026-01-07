@@ -59,7 +59,7 @@ print(shapiro.test(lisd_POST_w_index$POST_LISD_INDEX))
 # Paired Samples Wilcoxon Test : 
 
 # combine two data frames horizontally
-lisd_pre_post_hcomb <- cbind(lisd_PRE, lisd_POST)
+lisd_pre_post_w_index_hcomb <- cbind(lisd_PRE_w_index, lisd_POST_w_index)
 
 # # Define a function to perform paired Paired Samples Wilcoxon Test between pairs of columns
 paired_wilcoxon_test <- function(before, after) {
@@ -67,8 +67,8 @@ paired_wilcoxon_test <- function(before, after) {
 }
 
 # # Apply paired Paired Samples Wilcoxon Test to each pair of pre and post columns
-results_wilcoxon_test <- map2(lisd_pre_post_hcomb[grepl("PRE", names(lisd_pre_post_hcomb))],
-                lisd_pre_post_hcomb[grepl("POST", names(lisd_pre_post_hcomb))],
+results_wilcoxon_test <- map2(lisd_pre_post_w_index_hcomb[grepl("PRE", names(lisd_pre_post_w_index_hcomb))],
+                lisd_pre_post_w_index_hcomb[grepl("POST", names(lisd_pre_post_w_index_hcomb))],
                 paired_wilcoxon_test)
 
 # # Print the results
