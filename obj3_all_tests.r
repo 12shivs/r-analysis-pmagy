@@ -166,18 +166,6 @@ paired_wilcoxon_test <- function(before, after) {
                     hn_pre_post_w_index_hcomb[grepl("POST", names(hn_pre_post_w_index_hcomb))],
                     paired_wilcoxon_test)
 
-tryCatch({
-  # Code that may produce a warning
-#   Warning message:
-# In wilcox.test.default(before, after, paired = TRUE) :
-#   cannot compute exact p-value with zeroes
-
-
-}, warning = function(w) {
-  # Code to handle the warning
-  cat("A warning occurred \n")
-  return(NaN) # Return a specific value in case of a warning
-})
 
 # # Print the results
 print("Print the results for column/question wise Paired Samples Wilcoxon Test")

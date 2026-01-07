@@ -772,14 +772,14 @@ print(cronbach.alpha(hn_POST))</code></pre>
 ## 
 ## Items: 9
 ## Sample units: 486
-## alpha: 0.078</code></pre>
+## alpha: 0.055</code></pre>
 <pre class="r"><code>print(cronbach.alpha(hn_PRE))</code></pre>
 <pre><code>## 
 ## Cronbach&#39;s alpha for the &#39;hn_PRE&#39; data-set
 ## 
 ## Items: 9
 ## Sample units: 486
-## alpha: -0.133</code></pre>
+## alpha: -0.09</code></pre>
 <pre class="r"><code>#
 
 #Variance Inflation Factor (VIF):
@@ -798,23 +798,23 @@ print(&quot;VIF results for post data:&quot;)</code></pre>
 <pre><code>## [1] &quot;VIF results for post data:&quot;</code></pre>
 <pre class="r"><code>print(vif_results)</code></pre>
 <pre><code>## POST_HN.1...The.Anganwadi.Centre.in.your.village.is.functioning.properly.in.terms.of.building.condition..staff.availability..and.services 
-##                                                                                                                                  1.035161 
+##                                                                                                                                  1.032062 
 ##                                       POST_HN.2...Children..0.5.years..in.your.household.are.healthy.and.generally.free.from.any.illness. 
-##                                                                                                                                  1.020161 
+##                                                                                                                                  1.015870 
 ##                                                        POST_HN.3....Health.centres.in.the.village.are.safe.and.accessible.for.childbirth. 
-##                                                                                                                                  1.017628 
+##                                                                                                                                  1.012298 
 ##                                                      POST_HN.4....Vaccination.services.for.children.under.1.are.available.in.the.village. 
-##                                                                                                                                  1.009857 
+##                                                                                                                                  1.031608 
 ##                                                                   POST_HN.5....The.nearest.health.centre.is.easy.to.access.from.our.home. 
-##                                                                                                                                  1.007475 
+##                                                                                                                                  1.008427 
 ##                                                              POST_HN.7....Ambulance.services.in.the.village.are.available.and.functional. 
-##                                                                                                                                  1.049712 
+##                                                                                                                                  1.035254 
 ##                                        POST_HN.8...Pregnant.women.in.the.household.received.adequate.antenatal.check.ups.during.pregnancy 
-##                                                                                                                                  1.008997 
+##                                                                                                                                  1.010563 
 ##                                                POST_HN.9..Proper.treatment.was.provided.for.managing.chronic.illnesses.in.your.household. 
-##                                                                                                                                  1.011251 
+##                                                                                                                                  1.010637 
 ##              POST_HN.10....Your.household.receives.proper.treatment.for.communicable.diseases.such.as.malaria..TB..or.rabies.when.needed. 
-##                                                                                                                                  1.020488</code></pre>
+##                                                                                                                                  1.022533</code></pre>
 <pre class="r"><code># Fit a regression model on pre data
 hn_PRE_w_index &lt;-data.frame(read_excel(&quot;/home/shivs/r-analysis-pmagy/pre_pmagy_obj3_hn.xlsx&quot;,range = &quot;A1:J487&quot;))
 colnames(hn_PRE_w_index) &lt;- paste(&#39;PRE&#39;, colnames(hn_PRE_w_index), sep = &#39;_&#39;)
@@ -827,23 +827,23 @@ print(&quot;VIF results for pre data:&quot;)</code></pre>
 <pre><code>## [1] &quot;VIF results for pre data:&quot;</code></pre>
 <pre class="r"><code>print(vif_results)</code></pre>
 <pre><code>## PRE_HN.1...The.Anganwadi.Centre.in.your.village.is.functioning.properly.in.terms.of.building.condition..staff.availability..and.services 
-##                                                                                                                                 1.025391 
+##                                                                                                                                 1.001861 
 ##                                       PRE_HN.2...Children..0.5.years..in.your.household.are.healthy.and.generally.free.from.any.illness. 
-##                                                                                                                                 1.019345 
+##                                                                                                                                 1.014545 
 ##                                                        PRE_HN.3....Health.centres.in.the.village.are.safe.and.accessible.for.childbirth. 
-##                                                                                                                                 1.012730 
+##                                                                                                                                 1.012797 
 ##                                                      PRE_HN.4....Vaccination.services.for.children.under.1.are.available.in.the.village. 
-##                                                                                                                                 1.005464 
+##                                                                                                                                 1.004573 
 ##                                                                   PRE_HN.5....The.nearest.health.centre.is.easy.to.access.from.our.home. 
-##                                                                                                                                 1.008995 
+##                                                                                                                                 1.007904 
 ##                                                              PRE_HN.7....Ambulance.services.in.the.village.are.available.and.functional. 
-##                                                                                                                                 1.008979 
+##                                                                                                                                 1.006535 
 ##                                        PRE_HN.8...Pregnant.women.in.the.household.received.adequate.antenatal.check.ups.during.pregnancy 
-##                                                                                                                                 1.022875 
+##                                                                                                                                 1.011829 
 ##                                                PRE_HN.9..Proper.treatment.was.provided.for.managing.chronic.illnesses.in.your.household. 
-##                                                                                                                                 1.016848 
+##                                                                                                                                 1.014567 
 ##              PRE_HN.10....Your.household.receives.proper.treatment.for.communicable.diseases.such.as.malaria..TB..or.rabies.when.needed. 
-##                                                                                                                                 1.014546</code></pre>
+##                                                                                                                                 1.013445</code></pre>
 <pre class="r"><code>#TODO: Visualizing VIF Values from here https://www.geeksforgeeks.org/r-language/vif-function-in-r/
 #
 
@@ -855,7 +855,7 @@ print(&quot;Shapiro–Wilk Test results for pre data:&quot;)</code></pre>
 ##  Shapiro-Wilk normality test
 ## 
 ## data:  hn_PRE_w_index$PRE_HN_INDEX
-## W = 0.98482, p-value = 5.83e-05</code></pre>
+## W = 0.98762, p-value = 0.0003853</code></pre>
 <pre class="r"><code>print(&quot;Shapiro–Wilk Test results for post data:&quot;)</code></pre>
 <pre><code>## [1] &quot;Shapiro–Wilk Test results for post data:&quot;</code></pre>
 <pre class="r"><code>print(shapiro.test(hn_POST_w_index$POST_HN_INDEX))</code></pre>
@@ -863,7 +863,7 @@ print(&quot;Shapiro–Wilk Test results for pre data:&quot;)</code></pre>
 ##  Shapiro-Wilk normality test
 ## 
 ## data:  hn_POST_w_index$POST_HN_INDEX
-## W = 0.97376, p-value = 1.189e-07</code></pre>
+## W = 0.98019, p-value = 3.519e-06</code></pre>
 <pre class="r"><code>#
 
 # Paired Samples Wilcoxon Test : 
@@ -879,10 +879,9 @@ paired_wilcoxon_test &lt;- function(before, after) {
     # # Apply paired Paired Samples Wilcoxon Test to each pair of pre and post columns
     results_wilcoxon_test &lt;- map2(hn_pre_post_w_index_hcomb[grepl(&quot;PRE&quot;, names(hn_pre_post_w_index_hcomb))],
                     hn_pre_post_w_index_hcomb[grepl(&quot;POST&quot;, names(hn_pre_post_w_index_hcomb))],
-                    paired_wilcoxon_test)</code></pre>
-<pre><code>## Warning in wilcox.test.default(before, after, paired = TRUE): cannot compute
-## exact p-value with zeroes</code></pre>
-<pre class="r"><code>tryCatch({
+                    paired_wilcoxon_test)
+
+tryCatch({
   # Code that may produce a warning
 #   Warning message:
 # In wilcox.test.default(before, after, paired = TRUE) :
@@ -904,7 +903,7 @@ print(&quot;Print the results for column/question wise Paired Samples Wilcoxon T
 ##  Wilcoxon signed rank test with continuity correction
 ## 
 ## data:  before and after
-## V = 0, p-value = NA
+## V = 14168, p-value &lt; 2.2e-16
 ## alternative hypothesis: true location shift is not equal to 0
 ## 
 ## 
@@ -985,7 +984,7 @@ print(&quot;Print the results for column/question wise Paired Samples Wilcoxon T
 ##  Wilcoxon signed rank test with continuity correction
 ## 
 ## data:  before and after
-## V = 2, p-value &lt; 2.2e-16
+## V = 1, p-value &lt; 2.2e-16
 ## alternative hypothesis: true location shift is not equal to 0</code></pre>
 <pre class="r"><code>#
 
@@ -1012,10 +1011,10 @@ print(&quot;Print the results for column/question wise cohen d Test&quot;)</code
 ## 
 ## Cohen&#39;s d
 ## 
-## d estimate: 0 (negligible)
+## d estimate: -0.7812717 (medium)
 ## 95 percent confidence interval:
 ##      lower      upper 
-## -0.1258888  0.1258888 
+## -0.9118748 -0.6506686 
 ## 
 ## 
 ## $PRE_HN.2...Children..0.5.years..in.your.household.are.healthy.and.generally.free.from.any.illness.
@@ -1102,10 +1101,10 @@ print(&quot;Print the results for column/question wise cohen d Test&quot;)</code
 ## 
 ## Cohen&#39;s d
 ## 
-## d estimate: -4.907208 (large)
+## d estimate: -4.940168 (large)
 ## 95 percent confidence interval:
 ##     lower     upper 
-## -5.159303 -4.655113</code></pre>
+## -5.193535 -4.686801</code></pre>
 <pre class="r"><code>### HN Section tests COMPLETE
 print(&quot;HN Section tests COMPLETE&quot;)</code></pre>
 <pre><code>## [1] &quot;HN Section tests COMPLETE&quot;</code></pre>
