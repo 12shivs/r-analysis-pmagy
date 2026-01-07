@@ -77,6 +77,26 @@ print("Print the results for column/question wise Paired Samples Wilcoxon Test")
 print(results_wilcoxon_test)
 #
 
+## cohen's d test :
+#Step 1:
+#install.packages("effsize")
+library(effsize)
+
+#Step 2:
+
+## Define a function to perform cohen d Test between pairs of columns
+cohen_d_test <- function(before, after) {
+  wilcox.test(before, after, paired = TRUE)
+  cohen.d(before, after)
+}
+
+    ## Apply paired Paired Samples Wilcoxon Test to each pair of pre and post columns
+    results_cohen_d_test <- map2(edu_pre_post_w_index_hcomb[grepl("PRE", names(edu_pre_post_w_index_hcomb))],
+                    edu_pre_post_w_index_hcomb[grepl("POST", names(edu_pre_post_w_index_hcomb))],
+                    cohen_d_test)
+print("Print the results for column/question wise cohen d Test")
+print(results_cohen_d_test)
+
 ### EDU Section tests COMPLETE
 print("EDU Section tests COMPLETE")
 
@@ -135,7 +155,7 @@ print(shapiro.test(hn_POST_w_index$POST_HN_INDEX))
 # Paired Samples Wilcoxon Test : 
 
 # combine two data frames horizontally
-hn_pre_post_w_index_hcomb <- cbind(hn_PRE_w_index, hn_PRE_w_index)
+hn_pre_post_w_index_hcomb <- cbind(hn_PRE_w_index, hn_POST_w_index)
 
 # # Define a function to perform paired Paired Samples Wilcoxon Test between pairs of columns
 paired_wilcoxon_test <- function(before, after) {
@@ -164,6 +184,26 @@ tryCatch({
 print("Print the results for column/question wise Paired Samples Wilcoxon Test")
 print(results_wilcoxon_test)
 #
+
+## cohen's d test :
+#Step 1:
+# install.packages("effsize")
+library(effsize)
+
+#Step 2:
+
+## Define a function to perform cohen d Test between pairs of columns
+cohen_d_test <- function(before, after) {
+  wilcox.test(before, after, paired = TRUE)
+  cohen.d(before, after)
+}
+
+    ## Apply paired Paired Samples Wilcoxon Test to each pair of pre and post columns
+    results_cohen_d_test <- map2(hn_pre_post_w_index_hcomb[grepl("PRE", names(hn_pre_post_w_index_hcomb))],
+                    hn_pre_post_w_index_hcomb[grepl("POST", names(hn_pre_post_w_index_hcomb))],
+                    cohen_d_test)
+print("Print the results for column/question wise cohen d Test")
+print(results_cohen_d_test)
 
 ### HN Section tests COMPLETE
 print("HN Section tests COMPLETE")
