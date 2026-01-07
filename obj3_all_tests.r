@@ -3,15 +3,17 @@
 # import packages
 library(readxl)
 library(ltm)
+library(dplyr)
+# Load the purrr library for iteration
+library(purrr)
 
-
-file_path <- "/home/shivs/r-analysis-pmagy/post_pmagy.xlsx"
+post_pmagy_file_path <- "/home/shivs/r-analysis-pmagy/post_pmagy.xlsx"
 
 ### EDU Section tests:
 
 print("EDU Section tests: ")
 #POST PMAGY edu
-edu_POST <-data.frame(read_excel(file_path,sheet = "Sheet1",range = "AE1:AN487")) #edu_POST
+edu_POST <-data.frame(read_excel(post_pmagy_file_path,sheet = "Sheet1",range = "AE1:AN487")) #edu_POST
 colnames(edu_POST) <- paste('POST', colnames(edu_POST), sep = '_')
 #PRE PMAGY edu
 edu_PRE <-data.frame(read_excel("/home/shivs/r-analysis-pmagy/pre_pmagy_obj3_edu.xlsx",range = "A1:J487")) #edu_PRE
@@ -27,7 +29,7 @@ print(cronbach.alpha(edu_PRE))
 library(car)
 library(caTools)
 # Fit a regression model on post data
-edu_POST_w_index <-data.frame(read_excel(file_path,sheet = "Sheet1",range = "AE1:AO487"))
+edu_POST_w_index <-data.frame(read_excel(post_pmagy_file_path,sheet = "Sheet1",range = "AE1:AO487"))
 colnames(edu_POST_w_index) <- paste('POST', colnames(edu_POST_w_index), sep = '_')
 model_all <- lm(POST_EDU_INDEX ~ ., data = edu_POST_w_index)
 # Calculate VIF
@@ -77,3 +79,88 @@ print(results_wilcoxon_test)
 
 ### EDU Section tests COMPLETE
 print("EDU Section tests COMPLETE")
+
+
+### HN Section tests:
+
+print("HN Section tests: ")
+#POST PMAGY hn
+hn_POST <-data.frame(read_excel(post_pmagy_file_path,sheet = "Sheet1",range = "AP1:AX487")) 
+colnames(hn_POST) <- paste('POST', colnames(hn_POST), sep = '_')
+#PRE PMAGY hn
+hn_PRE <-data.frame(read_excel("/home/shivs/r-analysis-pmagy/pre_pmagy_obj3_hn.xlsx",range = "A1:I487")) 
+colnames(hn_PRE) <- paste('PRE', colnames(hn_PRE), sep = '_')
+
+
+#calculate Cronbach's Alpha:
+print(cronbach.alpha(hn_POST))
+print(cronbach.alpha(hn_PRE))
+#
+
+#Variance Inflation Factor (VIF):
+library(car)
+library(caTools)
+
+# Fit a regression model on post data
+hn_POST_w_index <-data.frame(read_excel(post_pmagy_file_path,sheet = "Sheet1",range = "AP1:AY487"))
+colnames(hn_POST_w_index) <- paste('POST', colnames(hn_POST_w_index), sep = '_')
+
+model_all <- lm(POST_HN_INDEX ~ ., data = hn_POST_w_index)
+# Calculate VIF
+vif_results <- car::vif(model_all)
+
+print("VIF results for post data:")
+print(vif_results)
+
+# Fit a regression model on pre data
+hn_PRE_w_index <-data.frame(read_excel("/home/shivs/r-analysis-pmagy/pre_pmagy_obj3_hn.xlsx",range = "A1:J487"))
+colnames(hn_PRE_w_index) <- paste('PRE', colnames(hn_PRE_w_index), sep = '_')
+
+model_all <- lm(PRE_HN_INDEX ~ ., data = hn_PRE_w_index)
+
+# Calculate VIF
+vif_results <- car::vif(model_all)
+print("VIF results for pre data:")
+print(vif_results)
+#TODO: Visualizing VIF Values from here https://www.geeksforgeeks.org/r-language/vif-function-in-r/
+#
+
+# Using theShapiro–Wilk Test :
+print("Shapiro–Wilk Test results for pre data:")
+print(shapiro.test(hn_PRE_w_index$PRE_HN_INDEX))
+print("Shapiro–Wilk Test results for post data:")
+print(shapiro.test(hn_POST_w_index$POST_HN_INDEX))
+#
+
+# Paired Samples Wilcoxon Test : 
+
+# combine two data frames horizontally
+hn_pre_post_hcomb <- cbind(hn_PRE, hn_POST)
+
+# # Define a function to perform paired Paired Samples Wilcoxon Test between pairs of columns
+paired_wilcoxon_test <- function(before, after) {
+  wilcox.test(before, after, paired = TRUE)
+}
+
+    # # Apply paired Paired Samples Wilcoxon Test to each pair of pre and post columns
+    results_wilcoxon_test <- map2(hn_pre_post_hcomb[grepl("PRE", names(hn_pre_post_hcomb))],
+                    hn_pre_post_hcomb[grepl("POST", names(hn_pre_post_hcomb))],
+                    paired_wilcoxon_test)
+
+tryCatch({
+  # Code that may produce a warning
+
+
+}, warning = function(w) {
+  # Code to handle the warning
+  cat("A warning occurred \n")
+  return(NaN) # Return a specific value in case of a warning
+})
+
+# # Print the results
+print("Print the results for column/question wise Paired Samples Wilcoxon Test")
+print(results_wilcoxon_test)
+#
+
+### HN Section tests COMPLETE
+print("HN Section tests COMPLETE")
