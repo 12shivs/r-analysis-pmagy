@@ -18,9 +18,10 @@ edu_PRE <-data.frame(read_excel("/home/shivs/r-analysis-pmagy/pre_pmagy_obj3_edu
 colnames(edu_PRE) <- paste('PRE', colnames(edu_PRE), sep = '_')
 
 
-#calculate Cronbach's Alpha
+#calculate Cronbach's Alpha:
 print(cronbach.alpha(edu_POST))
 print(cronbach.alpha(edu_PRE))
+#
 
 #Variance Inflation Factor (VIF):
 library(car)
@@ -44,8 +45,35 @@ model_all <- lm(PRE_EDU_INDEX ~ ., data = edu_PRE_w_index)
 vif_results <- car::vif(model_all)
 print("VIF results for pre data:")
 print(vif_results)
+#TODO: Visualizing VIF Values from here https://www.geeksforgeeks.org/r-language/vif-function-in-r/
+#
+
+# Using theShapiro–Wilk Test :
+print("Shapiro–Wilk Test results for pre data:")
+print(shapiro.test(edu_PRE_w_index$PRE_EDU_INDEX))
+print("Shapiro–Wilk Test results for post data:")
+print(shapiro.test(edu_POST_w_index$POST_EDU_INDEX))
+#
+
+# Paired Samples Wilcoxon Test : 
+
+# combine two data frames horizontally
+edu_pre_post_hcomb <- cbind(edu_PRE, edu_POST)
+
+# # Define a function to perform paired Paired Samples Wilcoxon Test between pairs of columns
+paired_wilcoxon_test <- function(before, after) {
+  wilcox.test(before, after, paired = TRUE)
+}
+
+# # Apply paired Paired Samples Wilcoxon Test to each pair of pre and post columns
+results_wilcoxon_test <- map2(edu_pre_post_hcomb[grepl("PRE", names(edu_pre_post_hcomb))],
+                edu_pre_post_hcomb[grepl("POST", names(edu_pre_post_hcomb))],
+                paired_wilcoxon_test)
+
+# # Print the results
+print("Print the results for column/question wise Paired Samples Wilcoxon Test")
+print(results_wilcoxon_test)
+#
 
 ### EDU Section tests COMPLETE
 print("EDU Section tests COMPLETE")
-
-
