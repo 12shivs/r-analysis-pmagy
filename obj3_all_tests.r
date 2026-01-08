@@ -105,24 +105,6 @@ print("Print the results for column/question wise Paired Samples Wilcoxon Test")
 }
 #
 
-## cohen's d test :
-#Step 1:
-#install.packages("effsize")
-library(effsize)
-
-#Step 2:
-
-## Define a function to perform cohen d Test between pairs of columns
-cohen_d_test <- function(before, after) {
-  cohen.d(before, after)
-}
-
-    ## Apply paired Paired Samples cohen d Test to each pair of pre and post columns
-    results_cohen_d_test <- map2(edu_pre_post_w_index_hcomb[grepl("PRE", names(edu_pre_post_w_index_hcomb))],
-                    edu_pre_post_w_index_hcomb[grepl("POST", names(edu_pre_post_w_index_hcomb))],
-                    cohen_d_test)
-print("Print the results for column/question wise cohen d Test")
-print(results_cohen_d_test)
 
 ### EDU Section tests COMPLETE
 print("EDU Section tests COMPLETE")
@@ -226,24 +208,6 @@ print("Print the results for column/question wise Paired Samples Wilcoxon Test")
 }
 #
 
-## cohen's d test :
-#Step 1:
-# install.packages("effsize")
-library(effsize)
-
-#Step 2:
-
-## Define a function to perform cohen d Test between pairs of columns
-cohen_d_test <- function(before, after) {
-  cohen.d(before, after)
-}
-
-    ## Apply paired Paired Samples cohen d Test to each pair of pre and post columns
-    results_cohen_d_test <- map2(hn_pre_post_w_index_hcomb[grepl("PRE", names(hn_pre_post_w_index_hcomb))],
-                    hn_pre_post_w_index_hcomb[grepl("POST", names(hn_pre_post_w_index_hcomb))],
-                    cohen_d_test)
-print("Print the results for column/question wise cohen d Test")
-print(results_cohen_d_test)
 
 ### HN Section tests COMPLETE
 print("HN Section tests COMPLETE")

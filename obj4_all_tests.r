@@ -103,24 +103,6 @@ print("Print the results for column/question wise Paired Samples Wilcoxon Test")
 }
 #
 
-## cohen's d test :
-#Step 1:
-#install.packages("effsize")
-library(effsize)
-
-#Step 2:
-
-## Define a function to perform cohen d Test between pairs of columns
-cohen_d_test <- function(before, after) {
-  cohen.d(before, after)
-}
-
-    ## Apply paired Paired Samples Wilcoxon Test to each pair of pre and post columns
-    results_cohen_d_test <- map2(lisd_pre_post_w_index_hcomb[grepl("PRE", names(lisd_pre_post_w_index_hcomb))],
-                    lisd_pre_post_w_index_hcomb[grepl("POST", names(lisd_pre_post_w_index_hcomb))],
-                    cohen_d_test)
-print("Print the results for column/question wise cohen d Test")
-print(results_cohen_d_test)
 
 ### lisd Section tests COMPLETE
 print("lisd Section tests COMPLETE")

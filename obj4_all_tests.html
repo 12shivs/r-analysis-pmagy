@@ -596,84 +596,8 @@ print(&quot;Print the results for column/question wise Paired Samples Wilcoxon T
 ## alternative hypothesis: true location shift is not equal to 0</code></pre>
 <pre class="r"><code>#
 
-## cohen&#39;s d test :
-#Step 1:
-#install.packages(&quot;effsize&quot;)
-library(effsize)
 
-#Step 2:
-
-## Define a function to perform cohen d Test between pairs of columns
-cohen_d_test &lt;- function(before, after) {
-  cohen.d(before, after)
-}
-
-    ## Apply paired Paired Samples Wilcoxon Test to each pair of pre and post columns
-    results_cohen_d_test &lt;- map2(lisd_pre_post_w_index_hcomb[grepl(&quot;PRE&quot;, names(lisd_pre_post_w_index_hcomb))],
-                    lisd_pre_post_w_index_hcomb[grepl(&quot;POST&quot;, names(lisd_pre_post_w_index_hcomb))],
-                    cohen_d_test)
-print(&quot;Print the results for column/question wise cohen d Test&quot;)</code></pre>
-<pre><code>## [1] &quot;Print the results for column/question wise cohen d Test&quot;</code></pre>
-<pre class="r"><code>print(results_cohen_d_test)</code></pre>
-<pre><code>## $PRE_LISD.1....Skill.development.training.programs.are.accessible.
-## 
-## Cohen&#39;s d
-## 
-## d estimate: -4.389146 (large)
-## 95 percent confidence interval:
-##     lower     upper 
-## -4.621550 -4.156743 
-## 
-## 
-## $PRE_LISD.2...Career.counselling...Government.job.coachings.classes.are.available.and.effective.
-## 
-## Cohen&#39;s d
-## 
-## d estimate: -3.034932 (large)
-## 95 percent confidence interval:
-##     lower     upper 
-## -3.219579 -2.850285 
-## 
-## 
-## $PRE_LISD.3...we.are.satisfied.with.the.opportunities.for.starting.a.business.in.the.village..including.access.to.loans.and.training.
-## 
-## Cohen&#39;s d
-## 
-## d estimate: -2.14882 (large)
-## 95 percent confidence interval:
-##     lower     upper 
-## -2.306919 -1.990722 
-## 
-## 
-## $PRE_LISD.3....Skill.training.has.positively.impacted.employment.in.our.household.
-## 
-## Cohen&#39;s d
-## 
-## d estimate: -1.355679 (large)
-## 95 percent confidence interval:
-##     lower     upper 
-## -1.495281 -1.216077 
-## 
-## 
-## $PRE_LISD.4.....A.member.of.our.household.is.currently.part.of.a.Self.Help.Group..SHG..
-## 
-## Cohen&#39;s d
-## 
-## d estimate: -2.942353 (large)
-## 95 percent confidence interval:
-##     lower     upper 
-## -3.124007 -2.760698 
-## 
-## 
-## $PRE_LISD_INDEX
-## 
-## Cohen&#39;s d
-## 
-## d estimate: -5.785104 (large)
-## 95 percent confidence interval:
-##     lower     upper 
-## -6.071717 -5.498491</code></pre>
-<pre class="r"><code>### lisd Section tests COMPLETE
+### lisd Section tests COMPLETE
 print(&quot;lisd Section tests COMPLETE&quot;)</code></pre>
 <pre><code>## [1] &quot;lisd Section tests COMPLETE&quot;</code></pre>
 
