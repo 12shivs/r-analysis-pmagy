@@ -4,6 +4,7 @@
 library(readxl)
 library(ltm)
 library(dplyr)
+library(rcompanion)
 # Load the purrr library for iteration
 library(purrr)
 
@@ -71,9 +72,35 @@ results_wilcoxon_test <- map2(lisd_pre_post_w_index_hcomb[grepl("PRE", names(lis
                 lisd_pre_post_w_index_hcomb[grepl("POST", names(lisd_pre_post_w_index_hcomb))],
                 paired_wilcoxon_test)
 
+# # Define a function to perform paired Paired Samples Wilcoxon Z Test between pairs of columns
+paired_wilcoxon_Z_VALS <- function(before, after) {
+  wilcoxonZ(before, after, paired=TRUE)
+}
+
+# Apply paired Paired Samples Wilcoxon Z Test to each pair of pre and post columns
+results_wilcoxon_Z_VALS <- map2(lisd_pre_post_w_index_hcomb[grepl("PRE", names(lisd_pre_post_w_index_hcomb))],
+                lisd_pre_post_w_index_hcomb[grepl("POST", names(lisd_pre_post_w_index_hcomb))],
+                paired_wilcoxon_Z_VALS)
+
 # # Print the results
 print("Print the results for column/question wise Paired Samples Wilcoxon Test")
-print(results_wilcoxon_test)
+
+  for (i in 1:length(results_wilcoxon_test)) {
+    Z = results_wilcoxon_Z_VALS[[i]]
+      names(Z) = "Z"
+      print(Z)
+
+  tN = length(results_wilcoxon_test)
+  names(tN) = "tN"
+
+    r = abs(Z)/sqrt(tN)
+  names(r) = "r"
+
+      print(r)
+
+
+  print(results_wilcoxon_test[[i]])
+}
 #
 
 ## cohen's d test :
@@ -97,3 +124,4 @@ print(results_cohen_d_test)
 
 ### lisd Section tests COMPLETE
 print("lisd Section tests COMPLETE")
+

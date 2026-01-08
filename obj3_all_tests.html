@@ -11,7 +11,7 @@
 
 <meta name="author" content="shivs" />
 
-<meta name="date" content="2026-01-07" />
+<meta name="date" content="2026-01-08" />
 
 <title>obj3_all_tests.r</title>
 
@@ -352,7 +352,7 @@ display: none;
 
 <h1 class="title toc-ignore">obj3_all_tests.r</h1>
 <h4 class="author">shivs</h4>
-<h4 class="date">2026-01-07</h4>
+<h4 class="date">2026-01-08</h4>
 
 </div>
 
@@ -377,7 +377,8 @@ library(ltm)</code></pre>
 <pre><code>## The following objects are masked from &#39;package:base&#39;:
 ## 
 ##     intersect, setdiff, setequal, union</code></pre>
-<pre class="r"><code># Load the purrr library for iteration
+<pre class="r"><code>library(rcompanion)
+# Load the purrr library for iteration
 library(purrr)
 
 post_pmagy_file_path &lt;- &quot;/home/shivs/r-analysis-pmagy/post_pmagy.xlsx&quot;
@@ -520,11 +521,40 @@ results_wilcoxon_test &lt;- map2(edu_pre_post_w_index_hcomb[grepl(&quot;PRE&quot
                 edu_pre_post_w_index_hcomb[grepl(&quot;POST&quot;, names(edu_pre_post_w_index_hcomb))],
                 paired_wilcoxon_test)
 
+
+# # Define a function to perform paired Paired Samples Wilcoxon Z Test between pairs of columns
+paired_wilcoxon_Z_VALS &lt;- function(before, after) {
+  wilcoxonZ(before, after, paired=TRUE)
+}
+
+# Apply paired Paired Samples Wilcoxon Z Test to each pair of pre and post columns
+results_wilcoxon_Z_VALS &lt;- map2(edu_pre_post_w_index_hcomb[grepl(&quot;PRE&quot;, names(edu_pre_post_w_index_hcomb))],
+                edu_pre_post_w_index_hcomb[grepl(&quot;POST&quot;, names(edu_pre_post_w_index_hcomb))],
+                paired_wilcoxon_Z_VALS)
+
 # # Print the results
 print(&quot;Print the results for column/question wise Paired Samples Wilcoxon Test&quot;)</code></pre>
 <pre><code>## [1] &quot;Print the results for column/question wise Paired Samples Wilcoxon Test&quot;</code></pre>
-<pre class="r"><code>print(results_wilcoxon_test)</code></pre>
-<pre><code>## $PRE_EDU.1....All.children.aged..6.17..years.in.your.household.are.attending.school...Primary..Middle..Secondary.and.Higher.Secondary.School.
+<pre class="r"><code>  for (i in 1:length(results_wilcoxon_test)) {
+    Z = results_wilcoxon_Z_VALS[[i]]
+      names(Z) = &quot;Z&quot;
+      print(Z)
+
+  tN = length(results_wilcoxon_test)
+  names(tN) = &quot;tN&quot;
+
+    r = abs(Z)/sqrt(tN)
+  names(r) = &quot;r&quot;
+
+      print(r)
+
+
+  print(results_wilcoxon_test[[i]])
+}</code></pre>
+<pre><code>##     Z 
+## -16.4 
+##        r 
+## 4.944786 
 ## 
 ##  Wilcoxon signed rank test with continuity correction
 ## 
@@ -532,8 +562,10 @@ print(&quot;Print the results for column/question wise Paired Samples Wilcoxon T
 ## V = 3363, p-value &lt; 2.2e-16
 ## alternative hypothesis: true location shift is not equal to 0
 ## 
-## 
-## $PRE_EDU.2...All.children..18.23..in.your.household.are.currently.attending.post.higher.secondary.education.
+##     Z 
+## -15.7 
+##        r 
+## 4.733728 
 ## 
 ##  Wilcoxon signed rank test with continuity correction
 ## 
@@ -541,8 +573,10 @@ print(&quot;Print the results for column/question wise Paired Samples Wilcoxon T
 ## V = 5137.5, p-value &lt; 2.2e-16
 ## alternative hypothesis: true location shift is not equal to 0
 ## 
-## 
-## $PRE_EDU.3...Children.in.our.household.receive.mid.day.meals.at.school.regularly.
+##     Z 
+## -19.5 
+##        r 
+## 5.879471 
 ## 
 ##  Wilcoxon signed rank test with continuity correction
 ## 
@@ -550,8 +584,10 @@ print(&quot;Print the results for column/question wise Paired Samples Wilcoxon T
 ## V = 22, p-value &lt; 2.2e-16
 ## alternative hypothesis: true location shift is not equal to 0
 ## 
-## 
-## $PRE_EDU.4...Children.in.my.household.have.benefited.from.government.scholarships..Pre.metric.and.Post.Metric..
+##     Z 
+## -19.6 
+##        r 
+## 5.909622 
 ## 
 ##  Wilcoxon signed rank test with continuity correction
 ## 
@@ -559,8 +595,10 @@ print(&quot;Print the results for column/question wise Paired Samples Wilcoxon T
 ## V = 6, p-value &lt; 2.2e-16
 ## alternative hypothesis: true location shift is not equal to 0
 ## 
-## 
-## $PRE_EDU.5...Availability.of.teachers.improved.in.the.village.schools.since.the.implementation.of.PMAGY
+##     Z 
+## -19.6 
+##        r 
+## 5.909622 
 ## 
 ##  Wilcoxon signed rank test with continuity correction
 ## 
@@ -568,8 +606,10 @@ print(&quot;Print the results for column/question wise Paired Samples Wilcoxon T
 ## V = 10.5, p-value &lt; 2.2e-16
 ## alternative hypothesis: true location shift is not equal to 0
 ## 
-## 
-## $PRE_EDU.6...Children.in.my.household.have.access.to.digital.learning.tools.
+##     Z 
+## -18.9 
+##        r 
+## 5.698564 
 ## 
 ##  Wilcoxon signed rank test with continuity correction
 ## 
@@ -577,8 +617,10 @@ print(&quot;Print the results for column/question wise Paired Samples Wilcoxon T
 ## V = 115, p-value &lt; 2.2e-16
 ## alternative hypothesis: true location shift is not equal to 0
 ## 
-## 
-## $PRE_EDU.7...Children.in.my.household.actively.participate.in.online.education.programs
+##   Z 
+## -19 
+##        r 
+## 5.728716 
 ## 
 ##  Wilcoxon signed rank test with continuity correction
 ## 
@@ -586,8 +628,10 @@ print(&quot;Print the results for column/question wise Paired Samples Wilcoxon T
 ## V = 100, p-value &lt; 2.2e-16
 ## alternative hypothesis: true location shift is not equal to 0
 ## 
-## 
-## $PRE_EDU.8...Has.anyone.in.your.family.ever.stopped.going.to.college.because.of.difficulty.in.traveling.or.lack.of.transport.facilities.
+##    Z 
+## 12.7 
+##        r 
+## 3.829194 
 ## 
 ##  Wilcoxon signed rank test with continuity correction
 ## 
@@ -595,8 +639,10 @@ print(&quot;Print the results for column/question wise Paired Samples Wilcoxon T
 ## V = 68380, p-value &lt; 2.2e-16
 ## alternative hypothesis: true location shift is not equal to 0
 ## 
-## 
-## $PRE_EDU.9...Has.any.child.from.your.family.left.school.before.completing.it.due.to.financial.reasons.or.household.responsibilities.
+##    Z 
+## 12.7 
+##        r 
+## 3.829194 
 ## 
 ##  Wilcoxon signed rank test with continuity correction
 ## 
@@ -604,8 +650,10 @@ print(&quot;Print the results for column/question wise Paired Samples Wilcoxon T
 ## V = 60662, p-value &lt; 2.2e-16
 ## alternative hypothesis: true location shift is not equal to 0
 ## 
-## 
-## $PRE_EDU.10....Students.in.our.household.attend.school.more.regularly.since.PMAGY.
+##     Z 
+## -13.8 
+##        r 
+## 4.160857 
 ## 
 ##  Wilcoxon signed rank test with continuity correction
 ## 
@@ -613,8 +661,10 @@ print(&quot;Print the results for column/question wise Paired Samples Wilcoxon T
 ## V = 6965.5, p-value &lt; 2.2e-16
 ## alternative hypothesis: true location shift is not equal to 0
 ## 
-## 
-## $PRE_EDU_INDEX
+##     Z 
+## -19.1 
+##        r 
+## 5.758867 
 ## 
 ##  Wilcoxon signed rank test with continuity correction
 ## 
@@ -882,11 +932,39 @@ paired_wilcoxon_test &lt;- function(before, after) {
                     paired_wilcoxon_test)
 
 
+# # Define a function to perform paired Paired Samples Wilcoxon Z Test between pairs of columns
+paired_wilcoxon_Z_VALS &lt;- function(before, after) {
+  wilcoxonZ(before, after, paired=TRUE)
+}
+
+# Apply paired Paired Samples Wilcoxon Z Test to each pair of pre and post columns
+results_wilcoxon_Z_VALS &lt;- map2(hn_pre_post_w_index_hcomb[grepl(&quot;PRE&quot;, names(hn_pre_post_w_index_hcomb))],
+                hn_pre_post_w_index_hcomb[grepl(&quot;POST&quot;, names(hn_pre_post_w_index_hcomb))],
+                paired_wilcoxon_Z_VALS)
+
 # # Print the results
 print(&quot;Print the results for column/question wise Paired Samples Wilcoxon Test&quot;)</code></pre>
 <pre><code>## [1] &quot;Print the results for column/question wise Paired Samples Wilcoxon Test&quot;</code></pre>
-<pre class="r"><code>print(results_wilcoxon_test)</code></pre>
-<pre><code>## $PRE_HN.1...The.Anganwadi.Centre.in.your.village.is.functioning.properly.in.terms.of.building.condition..staff.availability..and.services
+<pre class="r"><code>  for (i in 1:length(results_wilcoxon_test)) {
+    Z = results_wilcoxon_Z_VALS[[i]]
+      names(Z) = &quot;Z&quot;
+      print(Z)
+
+  tN = length(results_wilcoxon_test)
+  names(tN) = &quot;tN&quot;
+
+    r = abs(Z)/sqrt(tN)
+  names(r) = &quot;r&quot;
+
+      print(r)
+
+
+  print(results_wilcoxon_test[[i]])
+}</code></pre>
+<pre><code>##     Z 
+## -10.3 
+##        r 
+## 3.257146 
 ## 
 ##  Wilcoxon signed rank test with continuity correction
 ## 
@@ -894,8 +972,10 @@ print(&quot;Print the results for column/question wise Paired Samples Wilcoxon T
 ## V = 14168, p-value &lt; 2.2e-16
 ## alternative hypothesis: true location shift is not equal to 0
 ## 
-## 
-## $PRE_HN.2...Children..0.5.years..in.your.household.are.healthy.and.generally.free.from.any.illness.
+##     Z 
+## -17.9 
+##        r 
+## 5.660477 
 ## 
 ##  Wilcoxon signed rank test with continuity correction
 ## 
@@ -903,8 +983,10 @@ print(&quot;Print the results for column/question wise Paired Samples Wilcoxon T
 ## V = 441, p-value &lt; 2.2e-16
 ## alternative hypothesis: true location shift is not equal to 0
 ## 
-## 
-## $PRE_HN.3....Health.centres.in.the.village.are.safe.and.accessible.for.childbirth.
+##   Z 
+## -18 
+##      r 
+## 5.6921 
 ## 
 ##  Wilcoxon signed rank test with continuity correction
 ## 
@@ -912,8 +994,10 @@ print(&quot;Print the results for column/question wise Paired Samples Wilcoxon T
 ## V = 1148, p-value &lt; 2.2e-16
 ## alternative hypothesis: true location shift is not equal to 0
 ## 
-## 
-## $PRE_HN.4....Vaccination.services.for.children.under.1.are.available.in.the.village.
+##     Z 
+## -15.1 
+##        r 
+## 4.775039 
 ## 
 ##  Wilcoxon signed rank test with continuity correction
 ## 
@@ -921,8 +1005,10 @@ print(&quot;Print the results for column/question wise Paired Samples Wilcoxon T
 ## V = 5223.5, p-value &lt; 2.2e-16
 ## alternative hypothesis: true location shift is not equal to 0
 ## 
-## 
-## $PRE_HN.5....The.nearest.health.centre.is.easy.to.access.from.our.home.
+##     Z 
+## -14.1 
+##        r 
+## 4.458812 
 ## 
 ##  Wilcoxon signed rank test with continuity correction
 ## 
@@ -930,8 +1016,10 @@ print(&quot;Print the results for column/question wise Paired Samples Wilcoxon T
 ## V = 9015.5, p-value &lt; 2.2e-16
 ## alternative hypothesis: true location shift is not equal to 0
 ## 
-## 
-## $PRE_HN.7....Ambulance.services.in.the.village.are.available.and.functional.
+##     Z 
+## -19.1 
+##       r 
+## 6.03995 
 ## 
 ##  Wilcoxon signed rank test with continuity correction
 ## 
@@ -939,8 +1027,10 @@ print(&quot;Print the results for column/question wise Paired Samples Wilcoxon T
 ## V = 0, p-value &lt; 2.2e-16
 ## alternative hypothesis: true location shift is not equal to 0
 ## 
-## 
-## $PRE_HN.8...Pregnant.women.in.the.household.received.adequate.antenatal.check.ups.during.pregnancy
+##     Z 
+## -14.5 
+##        r 
+## 4.585303 
 ## 
 ##  Wilcoxon signed rank test with continuity correction
 ## 
@@ -948,8 +1038,10 @@ print(&quot;Print the results for column/question wise Paired Samples Wilcoxon T
 ## V = 11788, p-value &lt; 2.2e-16
 ## alternative hypothesis: true location shift is not equal to 0
 ## 
-## 
-## $PRE_HN.9..Proper.treatment.was.provided.for.managing.chronic.illnesses.in.your.household.
+##     Z 
+## -8.37 
+##        r 
+## 2.646826 
 ## 
 ##  Wilcoxon signed rank test with continuity correction
 ## 
@@ -957,8 +1049,10 @@ print(&quot;Print the results for column/question wise Paired Samples Wilcoxon T
 ## V = 15186, p-value &lt; 2.2e-16
 ## alternative hypothesis: true location shift is not equal to 0
 ## 
-## 
-## $PRE_HN.10....Your.household.receives.proper.treatment.for.communicable.diseases.such.as.malaria..TB..or.rabies.when.needed.
+##     Z 
+## -11.4 
+##        r 
+## 3.604997 
 ## 
 ##  Wilcoxon signed rank test with continuity correction
 ## 
@@ -966,8 +1060,10 @@ print(&quot;Print the results for column/question wise Paired Samples Wilcoxon T
 ## V = 12426, p-value &lt; 2.2e-16
 ## alternative hypothesis: true location shift is not equal to 0
 ## 
-## 
-## $PRE_HN_INDEX
+##     Z 
+## -19.1 
+##       r 
+## 6.03995 
 ## 
 ##  Wilcoxon signed rank test with continuity correction
 ## 

@@ -11,7 +11,7 @@
 
 <meta name="author" content="shivs" />
 
-<meta name="date" content="2026-01-07" />
+<meta name="date" content="2026-01-08" />
 
 <title>obj4_all_tests.r</title>
 
@@ -352,7 +352,7 @@ display: none;
 
 <h1 class="title toc-ignore">obj4_all_tests.r</h1>
 <h4 class="author">shivs</h4>
-<h4 class="date">2026-01-07</h4>
+<h4 class="date">2026-01-08</h4>
 
 </div>
 
@@ -377,7 +377,8 @@ library(ltm)</code></pre>
 <pre><code>## The following objects are masked from &#39;package:base&#39;:
 ## 
 ##     intersect, setdiff, setequal, union</code></pre>
-<pre class="r"><code># Load the purrr library for iteration
+<pre class="r"><code>library(rcompanion)
+# Load the purrr library for iteration
 library(purrr)
 
 post_pmagy_file_path &lt;- &quot;/home/shivs/r-analysis-pmagy/post_pmagy.xlsx&quot;
@@ -499,11 +500,39 @@ results_wilcoxon_test &lt;- map2(lisd_pre_post_w_index_hcomb[grepl(&quot;PRE&quo
                 lisd_pre_post_w_index_hcomb[grepl(&quot;POST&quot;, names(lisd_pre_post_w_index_hcomb))],
                 paired_wilcoxon_test)
 
+# # Define a function to perform paired Paired Samples Wilcoxon Z Test between pairs of columns
+paired_wilcoxon_Z_VALS &lt;- function(before, after) {
+  wilcoxonZ(before, after, paired=TRUE)
+}
+
+# Apply paired Paired Samples Wilcoxon Z Test to each pair of pre and post columns
+results_wilcoxon_Z_VALS &lt;- map2(lisd_pre_post_w_index_hcomb[grepl(&quot;PRE&quot;, names(lisd_pre_post_w_index_hcomb))],
+                lisd_pre_post_w_index_hcomb[grepl(&quot;POST&quot;, names(lisd_pre_post_w_index_hcomb))],
+                paired_wilcoxon_Z_VALS)
+
 # # Print the results
 print(&quot;Print the results for column/question wise Paired Samples Wilcoxon Test&quot;)</code></pre>
 <pre><code>## [1] &quot;Print the results for column/question wise Paired Samples Wilcoxon Test&quot;</code></pre>
-<pre class="r"><code>print(results_wilcoxon_test)</code></pre>
-<pre><code>## $PRE_LISD.1....Skill.development.training.programs.are.accessible.
+<pre class="r"><code>  for (i in 1:length(results_wilcoxon_test)) {
+    Z = results_wilcoxon_Z_VALS[[i]]
+      names(Z) = &quot;Z&quot;
+      print(Z)
+
+  tN = length(results_wilcoxon_test)
+  names(tN) = &quot;tN&quot;
+
+    r = abs(Z)/sqrt(tN)
+  names(r) = &quot;r&quot;
+
+      print(r)
+
+
+  print(results_wilcoxon_test[[i]])
+}</code></pre>
+<pre><code>##   Z 
+## -19 
+##        r 
+## 7.756718 
 ## 
 ##  Wilcoxon signed rank test with continuity correction
 ## 
@@ -511,8 +540,10 @@ print(&quot;Print the results for column/question wise Paired Samples Wilcoxon T
 ## V = 130, p-value &lt; 2.2e-16
 ## alternative hypothesis: true location shift is not equal to 0
 ## 
-## 
-## $PRE_LISD.2...Career.counselling...Government.job.coachings.classes.are.available.and.effective.
+##     Z 
+## -18.2 
+##        r 
+## 7.430119 
 ## 
 ##  Wilcoxon signed rank test with continuity correction
 ## 
@@ -520,8 +551,10 @@ print(&quot;Print the results for column/question wise Paired Samples Wilcoxon T
 ## V = 559, p-value &lt; 2.2e-16
 ## alternative hypothesis: true location shift is not equal to 0
 ## 
-## 
-## $PRE_LISD.3...we.are.satisfied.with.the.opportunities.for.starting.a.business.in.the.village..including.access.to.loans.and.training.
+##     Z 
+## -17.1 
+##        r 
+## 6.981046 
 ## 
 ##  Wilcoxon signed rank test with continuity correction
 ## 
@@ -529,8 +562,10 @@ print(&quot;Print the results for column/question wise Paired Samples Wilcoxon T
 ## V = 2068, p-value &lt; 2.2e-16
 ## alternative hypothesis: true location shift is not equal to 0
 ## 
-## 
-## $PRE_LISD.3....Skill.training.has.positively.impacted.employment.in.our.household.
+##     Z 
+## -14.5 
+##      r 
+## 5.9196 
 ## 
 ##  Wilcoxon signed rank test with continuity correction
 ## 
@@ -538,8 +573,10 @@ print(&quot;Print the results for column/question wise Paired Samples Wilcoxon T
 ## V = 4485, p-value &lt; 2.2e-16
 ## alternative hypothesis: true location shift is not equal to 0
 ## 
-## 
-## $PRE_LISD.4.....A.member.of.our.household.is.currently.part.of.a.Self.Help.Group..SHG..
+##     Z 
+## -18.4 
+##        r 
+## 7.511769 
 ## 
 ##  Wilcoxon signed rank test with continuity correction
 ## 
@@ -547,8 +584,10 @@ print(&quot;Print the results for column/question wise Paired Samples Wilcoxon T
 ## V = 20, p-value &lt; 2.2e-16
 ## alternative hypothesis: true location shift is not equal to 0
 ## 
-## 
-## $PRE_LISD_INDEX
+##     Z 
+## -19.1 
+##        r 
+## 7.797542 
 ## 
 ##  Wilcoxon signed rank test with continuity correction
 ## 
