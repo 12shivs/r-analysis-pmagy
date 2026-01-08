@@ -5,8 +5,7 @@ library(readxl)
 library(ltm)
 library(dplyr)
 library(rcompanion)
-library(car)
-library(caTools)
+# Load the purrr library for iteration
 library(purrr)
 
 post_pmagy_file_path <- "/home/shivs/r-analysis-pmagy/post_pmagy.xlsx"
@@ -28,6 +27,8 @@ print(cronbach.alpha(edu_PRE))
 #
 
 # Variance Inflation Factor (VIF):
+library(car)
+library(caTools)
 # Fit a regression model on post data
 edu_POST_w_index <- data.frame(read_excel(post_pmagy_file_path, sheet = "Sheet1", range = "AE1:AO487"))
 colnames(edu_POST_w_index) <- paste("POST", colnames(edu_POST_w_index), sep = "_")
@@ -47,7 +48,7 @@ model_all <- lm(PRE_EDU_INDEX ~ ., data = edu_PRE_w_index)
 vif_results <- car::vif(model_all)
 print("VIF results for pre data:")
 print(vif_results)
- 
+# TODO: Visualizing VIF Values from here https://www.geeksforgeeks.org/r-language/vif-function-in-r/
 #
 
 # Using theShapiro–Wilk Test :
@@ -130,6 +131,8 @@ print(cronbach.alpha(hn_PRE))
 #
 
 # Variance Inflation Factor (VIF):
+library(car)
+library(caTools)
 
 # Fit a regression model on post data
 hn_POST_w_index <- data.frame(read_excel(post_pmagy_file_path, sheet = "Sheet1", range = "AP1:AY487"))
@@ -152,7 +155,7 @@ model_all <- lm(PRE_HN_INDEX ~ ., data = hn_PRE_w_index)
 vif_results <- car::vif(model_all)
 print("VIF results for pre data:")
 print(vif_results)
- 
+# TODO: Visualizing VIF Values from here https://www.geeksforgeeks.org/r-language/vif-function-in-r/
 #
 
 # Using theShapiro–Wilk Test :

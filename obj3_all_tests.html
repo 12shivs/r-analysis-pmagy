@@ -387,15 +387,15 @@ post_pmagy_file_path &lt;- &quot;/home/shivs/r-analysis-pmagy/post_pmagy.xlsx&qu
 
 print(&quot;EDU Section tests: &quot;)</code></pre>
 <pre><code>## [1] &quot;EDU Section tests: &quot;</code></pre>
-<pre class="r"><code>#POST PMAGY edu
-edu_POST &lt;-data.frame(read_excel(post_pmagy_file_path,sheet = &quot;Sheet1&quot;,range = &quot;AE1:AN487&quot;)) #edu_POST
-colnames(edu_POST) &lt;- paste(&#39;POST&#39;, colnames(edu_POST), sep = &#39;_&#39;)
-#PRE PMAGY edu
-edu_PRE &lt;-data.frame(read_excel(&quot;/home/shivs/r-analysis-pmagy/pre_pmagy_obj3_edu.xlsx&quot;,range = &quot;A1:J487&quot;)) #edu_PRE
-colnames(edu_PRE) &lt;- paste(&#39;PRE&#39;, colnames(edu_PRE), sep = &#39;_&#39;)
+<pre class="r"><code># POST PMAGY edu
+edu_POST &lt;- data.frame(read_excel(post_pmagy_file_path, sheet = &quot;Sheet1&quot;, range = &quot;AE1:AN487&quot;)) # edu_POST
+colnames(edu_POST) &lt;- paste(&quot;POST&quot;, colnames(edu_POST), sep = &quot;_&quot;)
+# PRE PMAGY edu
+edu_PRE &lt;- data.frame(read_excel(&quot;/home/shivs/r-analysis-pmagy/pre_pmagy_obj3_edu.xlsx&quot;, range = &quot;A1:J487&quot;)) # edu_PRE
+colnames(edu_PRE) &lt;- paste(&quot;PRE&quot;, colnames(edu_PRE), sep = &quot;_&quot;)
 
 
-#calculate Cronbach&#39;s Alpha:
+# calculate Cronbach&#39;s Alpha:
 print(cronbach.alpha(edu_POST))</code></pre>
 <pre><code>## 
 ## Cronbach&#39;s alpha for the &#39;edu_POST&#39; data-set
@@ -412,7 +412,7 @@ print(cronbach.alpha(edu_POST))</code></pre>
 ## alpha: -0.07</code></pre>
 <pre class="r"><code>#
 
-#Variance Inflation Factor (VIF):
+# Variance Inflation Factor (VIF):
 library(car)</code></pre>
 <pre><code>## Loading required package: carData</code></pre>
 <pre><code>## 
@@ -425,8 +425,8 @@ library(car)</code></pre>
 ##     recode</code></pre>
 <pre class="r"><code>library(caTools)
 # Fit a regression model on post data
-edu_POST_w_index &lt;-data.frame(read_excel(post_pmagy_file_path,sheet = &quot;Sheet1&quot;,range = &quot;AE1:AO487&quot;))
-colnames(edu_POST_w_index) &lt;- paste(&#39;POST&#39;, colnames(edu_POST_w_index), sep = &#39;_&#39;)
+edu_POST_w_index &lt;- data.frame(read_excel(post_pmagy_file_path, sheet = &quot;Sheet1&quot;, range = &quot;AE1:AO487&quot;))
+colnames(edu_POST_w_index) &lt;- paste(&quot;POST&quot;, colnames(edu_POST_w_index), sep = &quot;_&quot;)
 model_all &lt;- lm(POST_EDU_INDEX ~ ., data = edu_POST_w_index)
 # Calculate VIF
 vif_results &lt;- car::vif(model_all)
@@ -455,8 +455,8 @@ print(&quot;VIF results for post data:&quot;)</code></pre>
 ##                                                            POST_EDU.10....Students.in.our.household.attend.school.more.regularly.since.PMAGY. 
 ##                                                                                                                                      1.023575</code></pre>
 <pre class="r"><code># Fit a regression model on pre data
-edu_PRE_w_index &lt;-data.frame(read_excel(&quot;/home/shivs/r-analysis-pmagy/pre_pmagy_obj3_edu.xlsx&quot;,range = &quot;A1:K487&quot;))
-colnames(edu_PRE_w_index) &lt;- paste(&#39;PRE&#39;, colnames(edu_PRE_w_index), sep = &#39;_&#39;)
+edu_PRE_w_index &lt;- data.frame(read_excel(&quot;/home/shivs/r-analysis-pmagy/pre_pmagy_obj3_edu.xlsx&quot;, range = &quot;A1:K487&quot;))
+colnames(edu_PRE_w_index) &lt;- paste(&quot;PRE&quot;, colnames(edu_PRE_w_index), sep = &quot;_&quot;)
 
 model_all &lt;- lm(PRE_EDU_INDEX ~ ., data = edu_PRE_w_index)
 # Calculate VIF
@@ -484,7 +484,7 @@ print(&quot;VIF results for pre data:&quot;)</code></pre>
 ##                                                                                                                                     1.008338 
 ##                                                            PRE_EDU.10....Students.in.our.household.attend.school.more.regularly.since.PMAGY. 
 ##                                                                                                                                     1.011488</code></pre>
-<pre class="r"><code>#TODO: Visualizing VIF Values from here https://www.geeksforgeeks.org/r-language/vif-function-in-r/
+<pre class="r"><code># TODO: Visualizing VIF Values from here https://www.geeksforgeeks.org/r-language/vif-function-in-r/
 #
 
 # Using theShapiro–Wilk Test :
@@ -506,7 +506,7 @@ print(&quot;Shapiro–Wilk Test results for pre data:&quot;)</code></pre>
 ## W = 0.98917, p-value = 0.001174</code></pre>
 <pre class="r"><code>#
 
-# Paired Samples Wilcoxon Test : 
+# Paired Samples Wilcoxon Test :
 
 # combine two data frames horizontally
 edu_pre_post_w_index_hcomb &lt;- cbind(edu_PRE_w_index, edu_POST_w_index)
@@ -517,36 +517,40 @@ paired_wilcoxon_test &lt;- function(before, after) {
 }
 
 # Apply paired Paired Samples Wilcoxon Test to each pair of pre and post columns
-results_wilcoxon_test &lt;- map2(edu_pre_post_w_index_hcomb[grepl(&quot;PRE&quot;, names(edu_pre_post_w_index_hcomb))],
-                edu_pre_post_w_index_hcomb[grepl(&quot;POST&quot;, names(edu_pre_post_w_index_hcomb))],
-                paired_wilcoxon_test)
+results_wilcoxon_test &lt;- map2(
+  edu_pre_post_w_index_hcomb[grepl(&quot;PRE&quot;, names(edu_pre_post_w_index_hcomb))],
+  edu_pre_post_w_index_hcomb[grepl(&quot;POST&quot;, names(edu_pre_post_w_index_hcomb))],
+  paired_wilcoxon_test
+)
 
 
 # # Define a function to perform paired Paired Samples Wilcoxon Z Test between pairs of columns
 paired_wilcoxon_Z_VALS &lt;- function(before, after) {
-  wilcoxonZ(before, after, paired=TRUE)
+  wilcoxonZ(before, after, paired = TRUE)
 }
 
 # Apply paired Paired Samples Wilcoxon Z Test to each pair of pre and post columns
-results_wilcoxon_Z_VALS &lt;- map2(edu_pre_post_w_index_hcomb[grepl(&quot;PRE&quot;, names(edu_pre_post_w_index_hcomb))],
-                edu_pre_post_w_index_hcomb[grepl(&quot;POST&quot;, names(edu_pre_post_w_index_hcomb))],
-                paired_wilcoxon_Z_VALS)
+results_wilcoxon_Z_VALS &lt;- map2(
+  edu_pre_post_w_index_hcomb[grepl(&quot;PRE&quot;, names(edu_pre_post_w_index_hcomb))],
+  edu_pre_post_w_index_hcomb[grepl(&quot;POST&quot;, names(edu_pre_post_w_index_hcomb))],
+  paired_wilcoxon_Z_VALS
+)
 
 # # Print the results
 print(&quot;Print the results for column/question wise Paired Samples Wilcoxon Test&quot;)</code></pre>
 <pre><code>## [1] &quot;Print the results for column/question wise Paired Samples Wilcoxon Test&quot;</code></pre>
-<pre class="r"><code>  for (i in 1:length(results_wilcoxon_test)) {
-    Z = results_wilcoxon_Z_VALS[[i]]
-      names(Z) = &quot;Z&quot;
-      print(Z)
+<pre class="r"><code>for (i in 1:length(results_wilcoxon_test)) {
+  Z &lt;- results_wilcoxon_Z_VALS[[i]]
+  names(Z) &lt;- &quot;Z&quot;
+  print(Z)
 
-  tN = length(results_wilcoxon_test)
-  names(tN) = &quot;tN&quot;
+  tN &lt;- length(results_wilcoxon_test)
+  names(tN) &lt;- &quot;tN&quot;
 
-    r = abs(Z)/sqrt(tN)
-  names(r) = &quot;r&quot;
+  r &lt;- abs(Z) / sqrt(tN)
+  names(r) &lt;- &quot;r&quot;
 
-      print(r)
+  print(r)
 
 
   print(results_wilcoxon_test[[i]])
@@ -681,15 +685,15 @@ print(&quot;EDU Section tests COMPLETE&quot;)</code></pre>
 
 print(&quot;HN Section tests: &quot;)</code></pre>
 <pre><code>## [1] &quot;HN Section tests: &quot;</code></pre>
-<pre class="r"><code>#POST PMAGY hn
-hn_POST &lt;-data.frame(read_excel(post_pmagy_file_path,sheet = &quot;Sheet1&quot;,range = &quot;AP1:AX487&quot;)) 
-colnames(hn_POST) &lt;- paste(&#39;POST&#39;, colnames(hn_POST), sep = &#39;_&#39;)
-#PRE PMAGY hn
-hn_PRE &lt;-data.frame(read_excel(&quot;/home/shivs/r-analysis-pmagy/pre_pmagy_obj3_hn.xlsx&quot;,range = &quot;A1:I487&quot;)) 
-colnames(hn_PRE) &lt;- paste(&#39;PRE&#39;, colnames(hn_PRE), sep = &#39;_&#39;)
+<pre class="r"><code># POST PMAGY hn
+hn_POST &lt;- data.frame(read_excel(post_pmagy_file_path, sheet = &quot;Sheet1&quot;, range = &quot;AP1:AX487&quot;))
+colnames(hn_POST) &lt;- paste(&quot;POST&quot;, colnames(hn_POST), sep = &quot;_&quot;)
+# PRE PMAGY hn
+hn_PRE &lt;- data.frame(read_excel(&quot;/home/shivs/r-analysis-pmagy/pre_pmagy_obj3_hn.xlsx&quot;, range = &quot;A1:I487&quot;))
+colnames(hn_PRE) &lt;- paste(&quot;PRE&quot;, colnames(hn_PRE), sep = &quot;_&quot;)
 
 
-#calculate Cronbach&#39;s Alpha:
+# calculate Cronbach&#39;s Alpha:
 print(cronbach.alpha(hn_POST))</code></pre>
 <pre><code>## 
 ## Cronbach&#39;s alpha for the &#39;hn_POST&#39; data-set
@@ -706,13 +710,13 @@ print(cronbach.alpha(hn_POST))</code></pre>
 ## alpha: -0.09</code></pre>
 <pre class="r"><code>#
 
-#Variance Inflation Factor (VIF):
+# Variance Inflation Factor (VIF):
 library(car)
 library(caTools)
 
 # Fit a regression model on post data
-hn_POST_w_index &lt;-data.frame(read_excel(post_pmagy_file_path,sheet = &quot;Sheet1&quot;,range = &quot;AP1:AY487&quot;))
-colnames(hn_POST_w_index) &lt;- paste(&#39;POST&#39;, colnames(hn_POST_w_index), sep = &#39;_&#39;)
+hn_POST_w_index &lt;- data.frame(read_excel(post_pmagy_file_path, sheet = &quot;Sheet1&quot;, range = &quot;AP1:AY487&quot;))
+colnames(hn_POST_w_index) &lt;- paste(&quot;POST&quot;, colnames(hn_POST_w_index), sep = &quot;_&quot;)
 
 model_all &lt;- lm(POST_HN_INDEX ~ ., data = hn_POST_w_index)
 # Calculate VIF
@@ -740,8 +744,8 @@ print(&quot;VIF results for post data:&quot;)</code></pre>
 ##              POST_HN.10....Your.household.receives.proper.treatment.for.communicable.diseases.such.as.malaria..TB..or.rabies.when.needed. 
 ##                                                                                                                                  1.022533</code></pre>
 <pre class="r"><code># Fit a regression model on pre data
-hn_PRE_w_index &lt;-data.frame(read_excel(&quot;/home/shivs/r-analysis-pmagy/pre_pmagy_obj3_hn.xlsx&quot;,range = &quot;A1:J487&quot;))
-colnames(hn_PRE_w_index) &lt;- paste(&#39;PRE&#39;, colnames(hn_PRE_w_index), sep = &#39;_&#39;)
+hn_PRE_w_index &lt;- data.frame(read_excel(&quot;/home/shivs/r-analysis-pmagy/pre_pmagy_obj3_hn.xlsx&quot;, range = &quot;A1:J487&quot;))
+colnames(hn_PRE_w_index) &lt;- paste(&quot;PRE&quot;, colnames(hn_PRE_w_index), sep = &quot;_&quot;)
 
 model_all &lt;- lm(PRE_HN_INDEX ~ ., data = hn_PRE_w_index)
 
@@ -768,7 +772,7 @@ print(&quot;VIF results for pre data:&quot;)</code></pre>
 ##                                                                                                                                 1.014567 
 ##              PRE_HN.10....Your.household.receives.proper.treatment.for.communicable.diseases.such.as.malaria..TB..or.rabies.when.needed. 
 ##                                                                                                                                 1.013445</code></pre>
-<pre class="r"><code>#TODO: Visualizing VIF Values from here https://www.geeksforgeeks.org/r-language/vif-function-in-r/
+<pre class="r"><code># TODO: Visualizing VIF Values from here https://www.geeksforgeeks.org/r-language/vif-function-in-r/
 #
 
 # Using theShapiro–Wilk Test :
@@ -790,7 +794,7 @@ print(&quot;Shapiro–Wilk Test results for pre data:&quot;)</code></pre>
 ## W = 0.98019, p-value = 3.519e-06</code></pre>
 <pre class="r"><code>#
 
-# Paired Samples Wilcoxon Test : 
+# Paired Samples Wilcoxon Test :
 
 # combine two data frames horizontally
 hn_pre_post_w_index_hcomb &lt;- cbind(hn_PRE_w_index, hn_POST_w_index)
@@ -800,37 +804,41 @@ paired_wilcoxon_test &lt;- function(before, after) {
   wilcox.test(before, after, paired = TRUE)
 }
 
-    # # Apply paired Paired Samples Wilcoxon Test to each pair of pre and post columns
-    results_wilcoxon_test &lt;- map2(hn_pre_post_w_index_hcomb[grepl(&quot;PRE&quot;, names(hn_pre_post_w_index_hcomb))],
-                    hn_pre_post_w_index_hcomb[grepl(&quot;POST&quot;, names(hn_pre_post_w_index_hcomb))],
-                    paired_wilcoxon_test)
+# # Apply paired Paired Samples Wilcoxon Test to each pair of pre and post columns
+results_wilcoxon_test &lt;- map2(
+  hn_pre_post_w_index_hcomb[grepl(&quot;PRE&quot;, names(hn_pre_post_w_index_hcomb))],
+  hn_pre_post_w_index_hcomb[grepl(&quot;POST&quot;, names(hn_pre_post_w_index_hcomb))],
+  paired_wilcoxon_test
+)
 
 
 # # Define a function to perform paired Paired Samples Wilcoxon Z Test between pairs of columns
 paired_wilcoxon_Z_VALS &lt;- function(before, after) {
-  wilcoxonZ(before, after, paired=TRUE)
+  wilcoxonZ(before, after, paired = TRUE)
 }
 
 # Apply paired Paired Samples Wilcoxon Z Test to each pair of pre and post columns
-results_wilcoxon_Z_VALS &lt;- map2(hn_pre_post_w_index_hcomb[grepl(&quot;PRE&quot;, names(hn_pre_post_w_index_hcomb))],
-                hn_pre_post_w_index_hcomb[grepl(&quot;POST&quot;, names(hn_pre_post_w_index_hcomb))],
-                paired_wilcoxon_Z_VALS)
+results_wilcoxon_Z_VALS &lt;- map2(
+  hn_pre_post_w_index_hcomb[grepl(&quot;PRE&quot;, names(hn_pre_post_w_index_hcomb))],
+  hn_pre_post_w_index_hcomb[grepl(&quot;POST&quot;, names(hn_pre_post_w_index_hcomb))],
+  paired_wilcoxon_Z_VALS
+)
 
 # # Print the results
 print(&quot;Print the results for column/question wise Paired Samples Wilcoxon Test&quot;)</code></pre>
 <pre><code>## [1] &quot;Print the results for column/question wise Paired Samples Wilcoxon Test&quot;</code></pre>
-<pre class="r"><code>  for (i in 1:length(results_wilcoxon_test)) {
-    Z = results_wilcoxon_Z_VALS[[i]]
-      names(Z) = &quot;Z&quot;
-      print(Z)
+<pre class="r"><code>for (i in 1:length(results_wilcoxon_test)) {
+  Z &lt;- results_wilcoxon_Z_VALS[[i]]
+  names(Z) &lt;- &quot;Z&quot;
+  print(Z)
 
-  tN = length(results_wilcoxon_test)
-  names(tN) = &quot;tN&quot;
+  tN &lt;- length(results_wilcoxon_test)
+  names(tN) &lt;- &quot;tN&quot;
 
-    r = abs(Z)/sqrt(tN)
-  names(r) = &quot;r&quot;
+  r &lt;- abs(Z) / sqrt(tN)
+  names(r) &lt;- &quot;r&quot;
 
-      print(r)
+  print(r)
 
 
   print(results_wilcoxon_test[[i]])

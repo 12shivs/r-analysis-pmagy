@@ -378,8 +378,18 @@ library(ltm)</code></pre>
 ## 
 ##     intersect, setdiff, setequal, union</code></pre>
 <pre class="r"><code>library(rcompanion)
-# Load the purrr library for iteration
 library(purrr)
+library(car)</code></pre>
+<pre><code>## Loading required package: carData</code></pre>
+<pre><code>## 
+## Attaching package: &#39;car&#39;</code></pre>
+<pre><code>## The following object is masked from &#39;package:purrr&#39;:
+## 
+##     some</code></pre>
+<pre><code>## The following object is masked from &#39;package:dplyr&#39;:
+## 
+##     recode</code></pre>
+<pre class="r"><code>library(caTools)
 
 post_pmagy_file_path &lt;- &quot;/home/shivs/r-analysis-pmagy/post_pmagy.xlsx&quot;
 
@@ -387,15 +397,15 @@ post_pmagy_file_path &lt;- &quot;/home/shivs/r-analysis-pmagy/post_pmagy.xlsx&qu
 
 print(&quot;lisd Section tests: &quot;)</code></pre>
 <pre><code>## [1] &quot;lisd Section tests: &quot;</code></pre>
-<pre class="r"><code>#POST PMAGY lisd
-lisd_POST &lt;-data.frame(read_excel(post_pmagy_file_path,sheet = &quot;Sheet1&quot;,range = &quot;CJ1:CN487&quot;)) #lisd_POST
-colnames(lisd_POST) &lt;- paste(&#39;POST&#39;, colnames(lisd_POST), sep = &#39;_&#39;)
-#PRE PMAGY lisd
-lisd_PRE &lt;-data.frame(read_excel(&quot;/home/shivs/r-analysis-pmagy/pre_pmagy_obj4_lisd.xlsx&quot;,range = &quot;A1:E487&quot;)) #lisd_PRE
-colnames(lisd_PRE) &lt;- paste(&#39;PRE&#39;, colnames(lisd_PRE), sep = &#39;_&#39;)
+<pre class="r"><code># POST PMAGY lisd
+lisd_POST &lt;- data.frame(read_excel(post_pmagy_file_path, sheet = &quot;Sheet1&quot;, range = &quot;CJ1:CN487&quot;)) # lisd_POST
+colnames(lisd_POST) &lt;- paste(&quot;POST&quot;, colnames(lisd_POST), sep = &quot;_&quot;)
+# PRE PMAGY lisd
+lisd_PRE &lt;- data.frame(read_excel(&quot;/home/shivs/r-analysis-pmagy/pre_pmagy_obj4_lisd.xlsx&quot;, range = &quot;A1:E487&quot;)) # lisd_PRE
+colnames(lisd_PRE) &lt;- paste(&quot;PRE&quot;, colnames(lisd_PRE), sep = &quot;_&quot;)
 
 
-#calculate Cronbach&#39;s Alpha:
+# calculate Cronbach&#39;s Alpha:
 print(cronbach.alpha(lisd_POST))</code></pre>
 <pre><code>## 
 ## Cronbach&#39;s alpha for the &#39;lisd_POST&#39; data-set
@@ -412,21 +422,11 @@ print(cronbach.alpha(lisd_POST))</code></pre>
 ## alpha: -0.065</code></pre>
 <pre class="r"><code>#
 
-#Variance Inflation Factor (VIF):
-library(car)</code></pre>
-<pre><code>## Loading required package: carData</code></pre>
-<pre><code>## 
-## Attaching package: &#39;car&#39;</code></pre>
-<pre><code>## The following object is masked from &#39;package:purrr&#39;:
-## 
-##     some</code></pre>
-<pre><code>## The following object is masked from &#39;package:dplyr&#39;:
-## 
-##     recode</code></pre>
-<pre class="r"><code>library(caTools)
+# Variance Inflation Factor (VIF):
+
 # Fit a regression model on post data
-lisd_POST_w_index &lt;-data.frame(read_excel(post_pmagy_file_path,sheet = &quot;Sheet1&quot;,range = &quot;CJ1:CO487&quot;))
-colnames(lisd_POST_w_index) &lt;- paste(&#39;POST&#39;, colnames(lisd_POST_w_index), sep = &#39;_&#39;)
+lisd_POST_w_index &lt;- data.frame(read_excel(post_pmagy_file_path, sheet = &quot;Sheet1&quot;, range = &quot;CJ1:CO487&quot;))
+colnames(lisd_POST_w_index) &lt;- paste(&quot;POST&quot;, colnames(lisd_POST_w_index), sep = &quot;_&quot;)
 model_all &lt;- lm(POST_LISD_INDEX ~ ., data = lisd_POST_w_index)
 # Calculate VIF
 vif_results &lt;- car::vif(model_all)
@@ -445,8 +445,8 @@ print(&quot;VIF results for post data:&quot;)</code></pre>
 ##                                               POST_LISD.4.....A.member.of.our.household.is.currently.part.of.a.Self.Help.Group..SHG.. 
 ##                                                                                                                              1.015522</code></pre>
 <pre class="r"><code># Fit a regression model on pre data
-lisd_PRE_w_index &lt;-data.frame(read_excel(&quot;/home/shivs/r-analysis-pmagy/pre_pmagy_obj4_lisd.xlsx&quot;,range = &quot;A1:F487&quot;))
-colnames(lisd_PRE_w_index) &lt;- paste(&#39;PRE&#39;, colnames(lisd_PRE_w_index), sep = &#39;_&#39;)
+lisd_PRE_w_index &lt;- data.frame(read_excel(&quot;/home/shivs/r-analysis-pmagy/pre_pmagy_obj4_lisd.xlsx&quot;, range = &quot;A1:F487&quot;))
+colnames(lisd_PRE_w_index) &lt;- paste(&quot;PRE&quot;, colnames(lisd_PRE_w_index), sep = &quot;_&quot;)
 model_all &lt;- lm(PRE_LISD_INDEX ~ ., data = lisd_PRE_w_index)
 # Calculate VIF
 vif_results &lt;- car::vif(model_all)
@@ -463,8 +463,7 @@ print(&quot;VIF results for pre data:&quot;)</code></pre>
 ##                                                                                                                             1.009637 
 ##                                               PRE_LISD.4.....A.member.of.our.household.is.currently.part.of.a.Self.Help.Group..SHG.. 
 ##                                                                                                                             1.017514</code></pre>
-<pre class="r"><code>#TODO: Visualizing VIF Values from here https://www.geeksforgeeks.org/r-language/vif-function-in-r/
-#
+<pre class="r"><code>#
 
 # Using theShapiro–Wilk Test :
 print(&quot;Shapiro–Wilk Test results for pre data:&quot;)</code></pre>
@@ -485,7 +484,7 @@ print(&quot;Shapiro–Wilk Test results for pre data:&quot;)</code></pre>
 ## W = 0.94583, p-value = 2.469e-12</code></pre>
 <pre class="r"><code>#
 
-# Paired Samples Wilcoxon Test : 
+# Paired Samples Wilcoxon Test :
 
 # combine two data frames horizontally
 lisd_pre_post_w_index_hcomb &lt;- cbind(lisd_PRE_w_index, lisd_POST_w_index)
@@ -496,35 +495,39 @@ paired_wilcoxon_test &lt;- function(before, after) {
 }
 
 # # Apply paired Paired Samples Wilcoxon Test to each pair of pre and post columns
-results_wilcoxon_test &lt;- map2(lisd_pre_post_w_index_hcomb[grepl(&quot;PRE&quot;, names(lisd_pre_post_w_index_hcomb))],
-                lisd_pre_post_w_index_hcomb[grepl(&quot;POST&quot;, names(lisd_pre_post_w_index_hcomb))],
-                paired_wilcoxon_test)
+results_wilcoxon_test &lt;- map2(
+  lisd_pre_post_w_index_hcomb[grepl(&quot;PRE&quot;, names(lisd_pre_post_w_index_hcomb))],
+  lisd_pre_post_w_index_hcomb[grepl(&quot;POST&quot;, names(lisd_pre_post_w_index_hcomb))],
+  paired_wilcoxon_test
+)
 
 # # Define a function to perform paired Paired Samples Wilcoxon Z Test between pairs of columns
 paired_wilcoxon_Z_VALS &lt;- function(before, after) {
-  wilcoxonZ(before, after, paired=TRUE)
+  wilcoxonZ(before, after, paired = TRUE)
 }
 
 # Apply paired Paired Samples Wilcoxon Z Test to each pair of pre and post columns
-results_wilcoxon_Z_VALS &lt;- map2(lisd_pre_post_w_index_hcomb[grepl(&quot;PRE&quot;, names(lisd_pre_post_w_index_hcomb))],
-                lisd_pre_post_w_index_hcomb[grepl(&quot;POST&quot;, names(lisd_pre_post_w_index_hcomb))],
-                paired_wilcoxon_Z_VALS)
+results_wilcoxon_Z_VALS &lt;- map2(
+  lisd_pre_post_w_index_hcomb[grepl(&quot;PRE&quot;, names(lisd_pre_post_w_index_hcomb))],
+  lisd_pre_post_w_index_hcomb[grepl(&quot;POST&quot;, names(lisd_pre_post_w_index_hcomb))],
+  paired_wilcoxon_Z_VALS
+)
 
 # # Print the results
 print(&quot;Print the results for column/question wise Paired Samples Wilcoxon Test&quot;)</code></pre>
 <pre><code>## [1] &quot;Print the results for column/question wise Paired Samples Wilcoxon Test&quot;</code></pre>
-<pre class="r"><code>  for (i in 1:length(results_wilcoxon_test)) {
-    Z = results_wilcoxon_Z_VALS[[i]]
-      names(Z) = &quot;Z&quot;
-      print(Z)
+<pre class="r"><code>for (i in 1:length(results_wilcoxon_test)) {
+  Z &lt;- results_wilcoxon_Z_VALS[[i]]
+  names(Z) &lt;- &quot;Z&quot;
+  print(Z)
 
-  tN = length(results_wilcoxon_test)
-  names(tN) = &quot;tN&quot;
+  tN &lt;- length(results_wilcoxon_test)
+  names(tN) &lt;- &quot;tN&quot;
 
-    r = abs(Z)/sqrt(tN)
-  names(r) = &quot;r&quot;
+  r &lt;- abs(Z) / sqrt(tN)
+  names(r) &lt;- &quot;r&quot;
 
-      print(r)
+  print(r)
 
 
   print(results_wilcoxon_test[[i]])
